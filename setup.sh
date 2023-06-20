@@ -53,13 +53,16 @@ install_if_needed tree
 install_if_needed wget
 
 install_cask_if_needed appcleaner
+install_cask_if_needed arc
 install_cask_if_needed bitwarden
 install_cask_if_needed docker
 install_cask_if_needed dropbox
 install_cask_if_needed font-fira-code
 install_cask_if_needed font-hack-nerd-font
 install_cask_if_needed font-iosevka
+install_cask_if_needed height
 install_cask_if_needed iterm2
+install_cask_if_needed latest
 install_cask_if_needed obs
 install_cask_if_needed raycast
 install_cask_if_needed rescuetime
