@@ -37,32 +37,39 @@ install_cask_if_needed() {
 
 brew tap homebrew/cask-fonts
 
-install_if_needed git
-install_if_needed gh
-install_if_needed jq
-install_if_needed wget
-install_if_needed gcat coreutils
 install_if_needed bash
 install_if_needed bash_completion bash-completion
-install_if_needed fzf
-install_if_needed gnupg
-install_if_needed rg ripgrep
-install_if_needed tree
 install_if_needed bat
-install_if_needed tldr
+install_if_needed fzf
+install_if_needed gcat coreutils
+install_if_needed gh
+install_if_needed git
+install_if_needed gnupg
+install_if_needed jq
+install_if_needed rg ripgrep
 install_if_needed stow
+install_if_needed tldr
+install_if_needed tree
+install_if_needed wget
 
-install_cask_if_needed slack
-install_cask_if_needed raycast
-install_cask_if_needed iterm2
+install_cask_if_needed appcleaner
+install_cask_if_needed bitwarden
+install_cask_if_needed docker
+install_cask_if_needed dropbox
 install_cask_if_needed font-fira-code
-install_cask_if_needed font-iosevka
 install_cask_if_needed font-hack-nerd-font
+install_cask_if_needed font-iosevka
+install_cask_if_needed iterm2
+install_cask_if_needed obs
+install_cask_if_needed raycast
+install_cask_if_needed rescuetime
+install_cask_if_needed roam-research
+install_cask_if_needed rocket
+install_cask_if_needed shottr
+install_cask_if_needed slack
 install_cask_if_needed spotify
 install_cask_if_needed todoist
 install_cask_if_needed zoom
-install_cask_if_needed obs
-install_cask_if_needed appcleaner
 
 ## Emacs
 install_if_needed emacs-plus@29
