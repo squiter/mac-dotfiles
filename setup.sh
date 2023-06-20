@@ -1,4 +1,4 @@
-#!/user/bin/env bash
+#!/usr/bin/env bash
 
 set -eou pipefail
 
@@ -10,4 +10,18 @@ else
     echo "Updating Homebrew"
     brew update
 fi
+
+brew install git
+brew install gh
+brew install jq
+brew install wget
+brew install coreutils
+brew install bash
+brew install bash-completion
+brew install fzf
+brew install gnupg
+brew install ripgrep
+brew install tree
+brew install bat
+
 
