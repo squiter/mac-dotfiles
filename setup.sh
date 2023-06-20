@@ -83,3 +83,11 @@ if [ ! -d "${code_dir}/emacs-dotfiles" ]; then
 else
     echo "Emacs already configured..."
 fi
+
+if [ "$(which bash)" == "/opt/homebrew/bin/bash" ]; then
+    echo "Homebrew bash is your default shell!"
+else
+    echo "Setting your default shell to (homebrew) bash..."
+    chsh -s /opt/homebrew/bin/bash
+    echo "Shell setted to (homebrew) bash successefully!"
+fi
