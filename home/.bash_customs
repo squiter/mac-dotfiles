@@ -1,0 +1,169 @@
+#!/usr/bin/env bash
+
+source_if_exists() {
+    if [ -f "$1" ] ; then
+        source "$1"
+    fi
+}
+
+#########################
+# Custom configurations #
+#########################
+
+# This is like a `.uniq` on the hystory!
+export HISTCONTROL=ignoreboth:erasedups
+
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+
+# 10k lines of history
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+
+# Bash history handling with multiple terminals
+# This item must come before .ps1
+# export PROMPT_COMMAND='history -a'
+
+# https://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+source_if_exists "$HOME/.ps1"
+source_if_exists "$HOME/.bash_secrets"
+source_if_exists "$HOME/.bash_aliases"
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+export CDPATH=".:~/:~/Downloads:~/dev/code:~/dev/nu:~/dev/finbits"
+
+# Ignore case
+shopt -s cdspell
+bind 'set completion-ignore-case on'
+
+# Rbenv config
+if command -v rbenv &> /dev/null
+then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+    export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+fi
+
+
+# ActiveTCL
+export PATH="$PATH:/opt/ActiveTcl-8.6/bin"
+
+# NPM
+export PATH=$HOME/node_modules/.bin/:$PATH
+
+# NPM NixOS
+export PATH="$PATH:$HOME/.npm-global/bin"
+
+# pip --user
+export PATH=$HOME/.local/bin:$PATH
+
+# git fuzzy
+export PATH=$HOME/dev/code/git-fuzzy/bin/:$PATH
+
+# Terminator tab/title naming
+set_title() { printf "\e]2;$*\a"; }
+
+# editor
+export EDITOR="emacsclient -a $HOME/scripts/emacs-editor"
+export VISUAL=$EDITOR
+
+# Enable history for Erlang/Elixir
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+# Set my key as default
+export GPGKEY=A86BDBC5
+
+# Bash json parser
+source_if_exists "$HOME/scripts/json_value"
+
+# Exercism
+source_if_exists $HOME/.config/exercism/exercism_completion.bash
+
+# Fix to use Dunst instead norify-osd in i3
+export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
+
+# Stolen from https://github.com/jturolla/deq
+function deq() {
+    if [[ -z "$1" ]]
+    then
+        docker run -i jturolla/deq:latest eq
+    else
+        docker run -i jturolla/deq:latest eq "$1"
+    fi
+}
+
+# Homebrew 4 linux
+PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+
+# fd - cd to selected directory
+fd() {
+    local dir
+    dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --bind ctrl-k:kill-line,ctrl-g:abort"
+
+# expansion of `source <(navi widget bash)` to rewrite the keybinding
+__call_navi() {
+    local -r result="$(navi --print)"
+    local -r linecount="$(echo "$result" | wc -l)"
+
+    if [[ "$linecount" -lt 2 ]]; then
+        printf "$result"
+        return 0
+    fi
+
+    IFS=$'\n'
+    local i=1;
+    for line in $result; do
+        if echo "$line" | grep -q '\\$'; then
+            printf "${line::-1} "
+        elif [[ "$i" -eq "$linecount" ]]; then
+            printf "$line "
+        else
+            printf "${line}; "
+        fi
+        i=$((i+1))
+    done
+}
+
+bind '"\C-xn": " \C-b\C-k \C-u`__call_navi`\e\C-e\C-a\C-y\C-h\C-e\e \C-y\ey\C-x\C-x\C-f"'
+
+# mcfly configuration
+export MCFLY_FUZZY=true
+eval "$(mcfly init bash)"
+
+# AWS Helpers
+awsp () {
+    export AWS_DEFAULT_PROFILE=$1
+    export AWS_PROFILE=$1
+    export AWS_EB_PROFILE=$1
+    echo "Changed your AWS Profile to ${1}"
+}
+
+asp () {
+    awsp $(cat ~/.aws/credentials | rg "^\[" | sed 's/\[\(.*\)\]/\1/g' | fzf)
+}
+
+# direnv
+eval "$(direnv hook bash)"
+
+# Notifies when a log shell command ends (this should ran after direnv!)
+eval "$(ntfy shell-integration)"
+
+# FZF Tab Completion: https://github.com/lincheney/fzf-tab-completion
+if [ -f "$HOME/dev/code/fzf-tab-completion/bash/fzf-bash-completion.sh" ] ; then
+    source "$HOME/dev/code/fzf-tab-completion/bash/fzf-bash-completion.sh"
+    bind -x '"\t": fzf_bash_completion'
+fi
+
+# FinBits custom Configurations
+source_if_exists $HOME/.bash_finbits_customs

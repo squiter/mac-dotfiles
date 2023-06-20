@@ -1,0 +1,36 @@
+set editing-mode emacs
+# set bell-style visible
+set completion-ignore-case on
+# set history-size -1
+set keyseq-timeout 1000
+set colored-stats on
+
+# Reload the .inputrc file
+"\C-x\C-r":re-read-init-file
+
+# Show all available binds
+"\C-xh":"bind -p|fzf\C-j"
+
+# Add sudo to current command
+"\C-hs":"\C-asudo \C-e"
+
+# Project find file
+"\C-x\C-f":"$(find . 2>/dev/null | fzf)\C-j"
+
+# Go to project
+"\C-xo":"cd $(all_projects | fzf)\C-j"
+
+# Copy lpass password
+"\C-xp":"$ lpass show -c --password $(lpass ls  | fzf | awk '{print $(NF)}' | sed 's/\]//g')\C-j"
+
+# Kill process
+"\C-xk":"pgt-kill\C-j"
+
+# Run all tests from project
+"\C-xa":"be rspec spec\C-j"
+
+# Like helm show commands
+"\ex":"$(compgen -ac | fzf)\C-j"
+
+# Call navi in print mode
+"\C-xe":"navi --print\C-j"
