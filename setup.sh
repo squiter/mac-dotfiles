@@ -23,6 +23,17 @@ install_if_needed() {
   fi
 }
 
+install_cask_if_needed() {
+  local package=${1}
+  if [[ -e "/opt/homebrew/Caskroom/${package}" ]]; then
+    echo "${1} already installed..."
+  else
+    brew install --cask $package
+  fi
+}
+
+brew tap homebrew/cask-fonts
+
 install_if_needed git
 install_if_needed gh
 install_if_needed jq
@@ -37,4 +48,14 @@ install_if_needed tree
 install_if_needed bat
 install_if_needed tldr
 
-
+install_cask_if_needed slack
+install_cask_if_needed raycast
+install_cask_if_needed iterm2
+install_cask_if_needed font-fira-code
+install_cask_if_needed font-iosevka
+install_cask_if_needed font-hack-nerd-font
+install_cask_if_needed spotify
+install_cask_if_needed todoist
+install_cask_if_needed zoom
+install_cask_if_needed obs
+install_cask_if_needed appcleaner
