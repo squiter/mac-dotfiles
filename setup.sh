@@ -11,17 +11,27 @@ else
     brew update
 fi
 
-brew install git
-brew install gh
-brew install jq
-brew install wget
-brew install coreutils
-brew install bash
-brew install bash-completion
-brew install fzf
-brew install gnupg
-brew install ripgrep
-brew install tree
-brew install bat
+install_if_needed() {
+  local binary=$1
+  local package=${2:-$1}
+  if [[ -e "/opt/homebrew/bin/${binary}" || -L "/opt/homebrew/bin/${binary}" || -e "/opt/homebrew/etc/${binary}" || -L "/opt/homebrew/etc/${binary}" ]]; then
+    echo "${1} already installed..."
+  else
+    brew install $package
+  fi
+}
+
+install_if_needed git
+install_if_needed gh
+install_if_needed jq
+install_if_needed wget
+install_if_needed gcat coreutils
+install_if_needed bash
+install_if_needed bash_completion bash-completion
+install_if_needed fzf
+install_if_needed gnupg
+install_if_needed rg ripgrep
+install_if_needed tree
+install_if_needed bat
 
 
