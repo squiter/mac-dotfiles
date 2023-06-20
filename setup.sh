@@ -63,3 +63,13 @@ install_cask_if_needed todoist
 install_cask_if_needed zoom
 install_cask_if_needed obs
 install_cask_if_needed appcleaner
+
+## Emacs
+install_if_needed emacs-plus@29
+
+if [ ! -d "${code_dir}/emacs-dotfiles" ]; then
+    git clone git@github.com:squiter/emacs-dotfiles.git $code_dir/emacs-dotfiles
+    stow --target=$HOME $code_dir/emacs-dotfiles/dotfiles/
+else
+    echo "Emacs already configured..."
+fi
