@@ -2,7 +2,10 @@
 
 set -eou pipefail
 
-mkdir -p ~/dev/code ~/dev/finbits
+code_dir="${HOME}/dev/code"
+finbits_dir="${HOME}/dev/finbits"
+
+mkdir -p $code_dir $finbits_dir
 
 if [[ $(command -v brew) == "" ]]; then
     echo "Installing Hombrew"
@@ -47,6 +50,7 @@ install_if_needed rg ripgrep
 install_if_needed tree
 install_if_needed bat
 install_if_needed tldr
+install_if_needed stow
 
 install_cask_if_needed slack
 install_cask_if_needed raycast
