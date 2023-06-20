@@ -76,7 +76,7 @@ install_if_needed emacs-plus@29
 
 if [ ! -d "${code_dir}/emacs-dotfiles" ]; then
     git clone git@github.com:squiter/emacs-dotfiles.git $code_dir/emacs-dotfiles
-    stow --target=$HOME $code_dir/emacs-dotfiles/dotfiles/
+    stow --verbose --target=$HOME $code_dir/emacs-dotfiles/dotfiles/
 else
     echo "Emacs already configured..."
 fi
