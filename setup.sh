@@ -2,6 +2,8 @@
 
 set -eou pipefail
 
+mkdir -p ~/dev/code ~/dev/finbits
+
 if [[ $(command -v brew) == "" ]]; then
     echo "Installing Hombrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -33,5 +35,6 @@ install_if_needed gnupg
 install_if_needed rg ripgrep
 install_if_needed tree
 install_if_needed bat
+install_if_needed tldr
 
 
