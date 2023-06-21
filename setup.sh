@@ -46,6 +46,7 @@ install_if_needed gh
 install_if_needed git
 install_if_needed gnupg
 install_if_needed jq
+install_if_needed lsd
 install_if_needed rg ripgrep
 install_if_needed stow
 install_if_needed tldr
@@ -75,23 +76,32 @@ install_cask_if_needed todoist
 install_cask_if_needed zoom
 
 ## Emacs
+brew tap d12frosted/emacs-plus
 install_if_needed emacs-plus@29
+ln -fs /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications
 
 if [ ! -d "${code_dir}/emacs-dotfiles" ]; then
     git clone git@github.com:squiter/emacs-dotfiles.git $code_dir/emacs-dotfiles
-    stow --verbose --target=$HOME $code_dir/emacs-dotfiles/dotfiles/
 else
     echo "Emacs already configured..."
 fi
 
+cd $code_dir/emacs-dotfiles
+stow --verbose --target=$HOME dotfiles
+cd -
+
 ## Setup Bash
-if [ "$(which bash)" == "/opt/homebrew/bin/bash" ]; then
+if [ "${0}" == "-bash" ]; then
     echo "Homebrew bash is your default shell!"
 else
     echo "Setting your default shell to (homebrew) bash..."
-    chsh -s /opt/homebrew/bin/bash
+    if ! cat /etc/shells | grep -q "homebrew"; then
+      echo "/usr/homebrew/bin/bash" | sudo tee -a /etc/shells
+    fi
+    sudo chsh -s /opt/homebrew/bin/bash "$USER"
     echo "Shell setted to (homebrew) bash successefully!"
 fi
 
 ## Create the symlinks of my dotfiles
-stow --verbose --target=$HOME $code_dir/mac-dotfiles/home
+cd $code_dir/mac-dotfiles
+stow --verbose --target=$HOME home
