@@ -80,6 +80,9 @@ install_cask_if_needed zoom
 ## Emacs
 brew tap d12frosted/emacs-plus
 install_if_needed emacs-plus@29
+install_if_needed ispell
+install_if_needed aspell
+install_if_needed wakatime wakatime-cli
 ln -fs /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications
 
 if [ ! -d "${code_dir}/emacs-dotfiles" ]; then
