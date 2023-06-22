@@ -37,10 +37,13 @@ install_cask_if_needed() {
 
 brew tap homebrew/cask-fonts
 
+install_if_needed asdf
+install_if_needed awscli
 install_if_needed bash
 install_if_needed bash_completion bash-completion
 install_if_needed bat
 install_if_needed bw bitwarden-cli
+install_if_needed direnv
 install_if_needed fzf
 install_if_needed gcat coreutils
 install_if_needed gh
@@ -51,9 +54,68 @@ install_if_needed lsd
 install_if_needed pinentry-mac
 install_if_needed rg ripgrep
 install_if_needed stow
+install_if_needed terraform
 install_if_needed tldr
 install_if_needed tree
 install_if_needed wget
+install_if_needed wxwidgets
+
+. $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
+
+asdf_folder="$HOME/.asdf"
+
+if [ ! -d "$asdf_folder/plugins/nodejs" ]; then
+    asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+fi
+
+if [ ! -d "$asdf_folder/plugins/yarn" ]; then
+    asdf plugin add yarn
+fi
+
+if [ ! -d "$asdf_folder/plugins/erlang" ]; then
+    asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+fi
+
+if [ ! -d "$asdf_folder/plugins/elixir" ]; then
+   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+fi
+
+
+if [ ! -d "$asdf_folder/plugins/rust" ]; then
+    asdf plugin-add rust https://github.com/asdf-community/asdf-rust.git
+fi
+
+asdf plugin update --all
+
+if ! [ -x "$(command -v node)" ]; then
+    echo "Installing nodejs..."
+    asdf install nodejs 18.12.1
+    asdf global nodejs 18.12.1
+fi
+
+if ! [ -x "$(command -v yarn)" ]; then
+    echo "Installing yarn..."
+    asdf install yarn 1.22.19
+    asdf global yarn 1.22.19
+fi
+
+if ! [ -x "$(command -v erl)" ]; then
+    echo "Installing erlang..."
+    asdf install erlang 25.3
+    asdf global erlang 25.3
+fi
+
+if ! [ -x "$(command -v elixir)" ]; then
+    echo "Installing elixir..."
+    asdf install elixir 1.14.4-otp-25
+    asdf global elixir 1.14.4-otp-25
+fi
+
+if ! [ -x "$(command -v rustc)" ]; then
+    echo "Installing rust..."
+    asdf install rust 1.70.0
+    asdf global rust 1.70.0
+fi
 
 install_cask_if_needed appcleaner
 install_cask_if_needed arc
@@ -110,3 +172,5 @@ fi
 ## Create the symlinks of my dotfiles
 cd $code_dir/mac-dotfiles
 stow --verbose --target=$HOME home
+
+echo "Setup completed!"

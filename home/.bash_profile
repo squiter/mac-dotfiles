@@ -74,8 +74,13 @@ bind '"\C-xn": " \C-b\C-k \C-u`__call_navi`\e\C-e\C-a\C-y\C-h\C-e\e \C-y\ey\C-x\
 # Bash Completion
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
+# ASDF
+source_if_exists $HOME/.asdf/asdf.sh
+source_if_exists /opt/homebrew/opt/asdf/libexec/asdf.sh
+
 # Automcompletion for ASDF
 source_if_exists $HOME/.asdf/completions/asdf.bash
+source_if_exists /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
 
 # Setup Java Home when installed by ASDF
 source_if_exists $HOME/.asdf/plugins/java/set-java-home.bash
