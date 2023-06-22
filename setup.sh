@@ -40,6 +40,7 @@ brew tap homebrew/cask-fonts
 install_if_needed bash
 install_if_needed bash_completion bash-completion
 install_if_needed bat
+install_if_needed bw bitwarden-cli
 install_if_needed fzf
 install_if_needed gcat coreutils
 install_if_needed gh
