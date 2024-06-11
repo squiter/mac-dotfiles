@@ -53,6 +53,7 @@ install_if_needed jq
 install_if_needed lsd
 install_if_needed pinentry-mac
 install_if_needed rg ripgrep
+install_if_needed rga pandoc poppler ffmpeg
 install_if_needed stow
 install_if_needed terraform
 install_if_needed tldr
