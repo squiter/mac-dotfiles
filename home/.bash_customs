@@ -167,3 +167,7 @@ fi
 
 # FinBits custom Configurations
 source_if_exists $HOME/.bash_finbits_customs
+
+# Pipx
+export PATH="$PATH:/Users/squiter/.local/bin"
+eval "$(register-python-argcomplete pipx)"

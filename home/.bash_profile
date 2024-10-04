@@ -95,4 +95,5 @@ source_if_exists $HOME/.bash_functions_chatgpt
 export PATH="$PATH:/Users/squiter/.hishtory"
 source_if_exists /Users/squiter/.hishtory/config.sh
 
-
+# Created by `pipx` on 2024-07-19 14:23:00
+export PATH="$PATH:/Users/squiter/.local/bin"
