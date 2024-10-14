@@ -5,7 +5,11 @@ set -eou pipefail
 code_dir="${HOME}/dev/code"
 finbits_dir="${HOME}/dev/finbits"
 
-mkdir -p $code_dir $finbits_dir
+if [[ -d $code_dir || -d $finbits_dir ]]; then
+    echo "Project directories already created"
+else
+    mkdir -p $code_dir $finbits_dir
+fi
 
 if [[ $(command -v brew) == "" ]]; then
     echo "Installing Hombrew"
@@ -17,25 +21,23 @@ else
 fi
 
 install_if_needed() {
-  local binary=$1
-  local package=${2:-$1}
-  if [[ -e "/opt/homebrew/bin/${binary}" || -L "/opt/homebrew/bin/${binary}" || -e "/opt/homebrew/etc/${binary}" || -L "/opt/homebrew/etc/${binary}" ]]; then
-    echo "${1} already installed..."
-  else
-    brew install $package
-  fi
+    local binary=$1
+    local package=${2:-$1}
+    if [[ -e "/opt/homebrew/bin/${binary}" || -L "/opt/homebrew/bin/${binary}" || -e "/opt/homebrew/etc/${binary}" || -L "/opt/homebrew/etc/${binary}" ]]; then
+        echo "${1} already installed..."
+    else
+        brew install $package
+    fi
 }
 
 install_cask_if_needed() {
-  local package=${1}
-  if [[ -e "/opt/homebrew/Caskroom/${package}" ]]; then
-    echo "${1} already installed..."
-  else
-    brew install --cask $package
-  fi
+    local package=${1}
+    if [[ -e "/opt/homebrew/Caskroom/${package}" ]]; then
+        echo "${1} already installed..."
+    else
+        brew install --cask $package
+    fi
 }
-
-brew tap homebrew/cask-fonts
 
 install_if_needed asdf
 install_if_needed awscli
@@ -44,6 +46,7 @@ install_if_needed bash_completion bash-completion
 install_if_needed bat
 install_if_needed bw bitwarden-cli
 install_if_needed direnv
+install_if_needed borkdude/brew/babashka
 install_if_needed fzf
 install_if_needed gcat coreutils
 install_if_needed gh
@@ -81,17 +84,12 @@ if [ ! -d "$asdf_folder/plugins/elixir" ]; then
    asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
 fi
 
-
-if [ ! -d "$asdf_folder/plugins/rust" ]; then
-    asdf plugin-add rust https://github.com/asdf-community/asdf-rust.git
-fi
-
 asdf plugin update --all
 
 if ! [ -x "$(command -v node)" ]; then
     echo "Installing nodejs..."
-    asdf install nodejs 18.12.1
-    asdf global nodejs 18.12.1
+    asdf install nodejs 22.2.0
+    asdf global nodejs 22.2.0
 fi
 
 if ! [ -x "$(command -v yarn)" ]; then
@@ -108,15 +106,11 @@ fi
 
 if ! [ -x "$(command -v elixir)" ]; then
     echo "Installing elixir..."
-    asdf install elixir 1.14.4-otp-25
-    asdf global elixir 1.14.4-otp-25
+    asdf install elixir 1.16.2-otp-25
+    asdf global elixir 1.16.2-otp-25
 fi
 
-if ! [ -x "$(command -v rustc)" ]; then
-    echo "Installing rust..."
-    asdf install rust 1.70.0
-    asdf global rust 1.70.0
-fi
+install_if_needed pipx
 
 install_cask_if_needed appcleaner
 install_cask_if_needed arc
@@ -139,14 +133,25 @@ install_cask_if_needed slack
 install_cask_if_needed spotify
 install_cask_if_needed todoist
 install_cask_if_needed zoom
+install_cask_if_needed easydict
+
 
 ## Emacs
 brew tap d12frosted/emacs-plus
 install_if_needed emacs-plus@29
+
 install_if_needed ispell
 install_if_needed aspell
 install_if_needed wakatime wakatime-cli
+
 ln -fs /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications
+
+
+if [[ -e /Applications/Emacs.app ]]; then
+    echo "Emacs.app already at /Applications"
+else
+    ln -fs /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications
+fi
 
 if [ ! -d "${code_dir}/emacs-dotfiles" ]; then
     git clone git@github.com:squiter/emacs-dotfiles.git $code_dir/emacs-dotfiles
@@ -164,7 +169,7 @@ if [ "${0}" == "-bash" ]; then
 else
     echo "Setting your default shell to (homebrew) bash..."
     if ! cat /etc/shells | grep -q "homebrew"; then
-      echo "/usr/homebrew/bin/bash" | sudo tee -a /etc/shells
+        echo "/usr/homebrew/bin/bash" | sudo tee -a /etc/shells
     fi
     sudo chsh -s /opt/homebrew/bin/bash "$USER"
     echo "Shell setted to (homebrew) bash successefully!"
