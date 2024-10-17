@@ -101,14 +101,14 @@ fi
 
 if ! [ -x "$(command -v erl)" ]; then
     echo "Installing erlang..."
-    asdf install erlang 25.3
-    asdf global erlang 25.3
+    asdf install erlang 26.2.5
+    asdf global erlang 26.2.5
 fi
 
 if ! [ -x "$(command -v elixir)" ]; then
     echo "Installing elixir..."
-    asdf install elixir 1.16.2-otp-25
-    asdf global elixir 1.16.2-otp-25
+    asdf install elixir 1.17.3-otp-26
+    asdf global elixir 1.17.3-otp-26
 fi
 
 install_if_needed pipx
@@ -166,6 +166,7 @@ stow --verbose --target=$HOME dotfiles
 cd -
 
 ## Setup Bash
+# TODO: This check isn't working...
 if [ "${0}" == "-bash" ]; then
     echo "Homebrew bash is your default shell!"
 else
