@@ -5,6 +5,10 @@
   name = Brunno dos Santos
   email = brunno@brunno.me
   signingkey = FE6A1FA1A86BDBC5
+
+[includeIf "gitdir:/Users/brunno.dossantosleite/dev/**"]
+  path = ~/dev/remote/.gitconfig
+
 [alias]
   co = checkout
   ci = commit
