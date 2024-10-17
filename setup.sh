@@ -58,6 +58,7 @@ install_if_needed pinentry-mac
 install_if_needed rg ripgrep
 install_if_needed rga pandoc poppler ffmpeg
 install_if_needed stow
+install_if_needed the_silver_searcher
 install_if_needed terraform
 install_if_needed tldr
 install_if_needed tree
@@ -122,6 +123,7 @@ install_cask_if_needed font-hack-nerd-font
 install_cask_if_needed font-iosevka
 install_cask_if_needed height
 install_cask_if_needed iterm2
+install_cask_if_needed jordanbaird-ice
 install_cask_if_needed latest
 install_cask_if_needed obs
 install_cask_if_needed raycast
