@@ -3,12 +3,20 @@
 set -eou pipefail
 
 code_dir="${HOME}/dev/code"
-finbits_dir="${HOME}/dev/finbits"
+remote_dir="${HOME}/dev/remote"
+bin_dir="${HOME}/bin"
 
-if [[ -d $code_dir || -d $finbits_dir ]]; then
+if [[ -d $code_dir || -d $remote_dir ]]; then
     echo "Project directories already created"
 else
-    mkdir -p $code_dir $finbits_dir
+    mkdir -p $code_dir $remote_dir
+fi
+
+# To avoid having a ~/bin as an alias
+if [[ -d $bin_dir ]]; then
+    echo "~/bin directory already created"
+else
+    mkdir $bin_dir
 fi
 
 if [[ $(command -v brew) == "" ]]; then
@@ -87,25 +95,25 @@ fi
 
 asdf plugin update --all
 
-if ! [ -x "$(command -v node)" ]; then
+if [[ "$(command -v node)" != *"asdf"* ]]; then
     echo "Installing nodejs..."
     asdf install nodejs 22.2.0
     asdf global nodejs 22.2.0
 fi
 
-if ! [ -x "$(command -v yarn)" ]; then
+if [[ "$(command -v yarn)" != *"asdf"* ]]; then
     echo "Installing yarn..."
     asdf install yarn 1.22.19
     asdf global yarn 1.22.19
 fi
 
-if ! [ -x "$(command -v erl)" ]; then
+if [[ "$(command -v erl)" != *"asdf"* ]]; then
     echo "Installing erlang..."
     asdf install erlang 26.2.5
     asdf global erlang 26.2.5
 fi
 
-if ! [ -x "$(command -v elixir)" ]; then
+if [[ "$(command -v elixir)" != *"asdf"* ]]; then
     echo "Installing elixir..."
     asdf install elixir 1.17.3-otp-26
     asdf global elixir 1.17.3-otp-26
@@ -131,10 +139,10 @@ install_cask_if_needed rescuetime
 install_cask_if_needed roam-research
 install_cask_if_needed rocket
 install_cask_if_needed shottr
-install_cask_if_needed slack
+# install_cask_if_needed slack
 install_cask_if_needed spotify
 install_cask_if_needed todoist
-install_cask_if_needed zoom
+# install_cask_if_needed zoom
 install_cask_if_needed easydict
 
 
