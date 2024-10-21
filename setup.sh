@@ -166,8 +166,7 @@ stow --verbose --target=$HOME dotfiles
 cd -
 
 ## Setup Bash
-# TODO: This check isn't working...
-if [ "${0}" == "-bash" ]; then
+if [ "${SHELL}" == "/opt/homebrew/bin/bash" ]; then
     echo "Homebrew bash is your default shell!"
 else
     echo "Setting your default shell to (homebrew) bash..."
