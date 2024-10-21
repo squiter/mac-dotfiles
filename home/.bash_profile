@@ -88,6 +88,9 @@ source_if_exists $HOME/.asdf/plugins/java/set-java-home.bash
 # FinBits custom Configurations
 source_if_exists $HOME/.bash_finbits_customs
 
+# Remote custom Configurations
+source_if_exists $HOME/.bash_remote_customs
+
 # OpenAI ChatGPT Functions
 source_if_exists $HOME/.bash_functions_chatgpt
 

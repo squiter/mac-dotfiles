@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+asdf_folder="$HOME/.asdf"
+
+# Ensure you're using the correct Kubectl version
+if [ ! -d "$asdf_folder/plugins/kubectl" ]; then
+    asdf plugin-add kubectl https://github.com/asdf-community/asdf-kubectl.git
+fi
+
+if [[ "$(command -v kubectl)" != *"asdf"* ]]; then
+    echo "Installing Kubectl..."
+    asdf install kubectl 1.28.9
+    asdf global kubectl 1.28.9
+fi
+
+export AWS_PROFILE=sts
