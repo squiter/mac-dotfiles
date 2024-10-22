@@ -1,16 +1,39 @@
 #!/usr/bin/env bash
 
+# Setup new Apps only on the same day of addition
 asdf_folder="$HOME/.asdf"
+original_file=$HOME/dev/code/mac-dotfiles/home/.bash_remote_customs
+last_modified=$(stat -f %Sa -t %Y-%m-%d $original_file)
+today=$(date -I)
 
-# Ensure you're using the correct Kubectl version
-if [ ! -d "$asdf_folder/plugins/kubectl" ]; then
-    asdf plugin-add kubectl https://github.com/asdf-community/asdf-kubectl.git
-fi
+if [ "${last_modified}" == "${today}" ]; then
+    echo "==> .bash_remote_customs was modified today, running setup scripts..."
 
-if [[ "$(command -v kubectl)" != *"asdf"* ]]; then
-    echo "Installing Kubectl..."
-    asdf install kubectl 1.28.9
-    asdf global kubectl 1.28.9
+    # Ensure you're using the correct Kubectl version
+    if [ ! -d "$asdf_folder/plugins/kubectl" ]; then
+        asdf plugin-add kubectl https://github.com/asdf-community/asdf-kubectl.git
+    fi
+
+    if [[ "$(command -v kubectl)" != *"asdf"* ]]; then
+        echo "Installing Kubectl..."
+        asdf install kubectl 1.28.9
+        asdf global kubectl 1.28.9
+    fi
+
+    install_cask_if_needed() {
+        local package=${1}
+        if [[ -e "/opt/homebrew/Caskroom/${package}" ]]; then
+            echo "${1} already installed..."
+        else
+            brew install --cask $package
+        fi
+    }
+
+    install_cask_if_needed notion
+    install_cask_if_needed loom
+
+    echo "==> .bash_remote_customs setup was complete."
 fi
+# End of Setup new Apps
 
 export AWS_PROFILE=sts
