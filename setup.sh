@@ -48,13 +48,13 @@ install_cask_if_needed() {
 }
 
 install_if_needed asdf
-install_if_needed awscli
+install_if_needed aws awscli
 install_if_needed bash
 install_if_needed bash_completion bash-completion
 install_if_needed bat
 install_if_needed bw bitwarden-cli
 install_if_needed direnv
-install_if_needed borkdude/brew/babashka
+install_if_needed bb borkdude/brew/babashka
 install_if_needed fzf
 install_if_needed gcat coreutils
 install_if_needed gh
@@ -64,14 +64,24 @@ install_if_needed jq
 install_if_needed lsd
 install_if_needed pinentry-mac
 install_if_needed rg ripgrep
-install_if_needed rga pandoc poppler ffmpeg
+# ffmpeg bundle
+install_if_needed pandoc
+install_if_needed rga
+install_if_needed poppler
+install_if_needed ffmpeg
+# ffmpeg bundle finished
 install_if_needed stow
-install_if_needed the_silver_searcher
+install_if_needed ag the_silver_searcher
 install_if_needed terraform
 install_if_needed tldr
 install_if_needed tree
 install_if_needed wget
-install_if_needed wxwidgets
+install_if_needed wx-config wxwidgets
+install_if_needed yabai koekeishiya/formulae/yabai
+install_if_needed skhd koekeishiya/formulae/skhd
+
+yabai --start-service
+skhd --start-service
 
 . $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
 
@@ -148,11 +158,11 @@ install_cask_if_needed easydict
 
 ## Emacs
 brew tap d12frosted/emacs-plus
-install_if_needed emacs-plus@29
+install_if_needed emacs emacs-plus@29
 
 install_if_needed ispell
 install_if_needed aspell
-install_if_needed wakatime wakatime-cli
+install_if_needed wakatime-cli
 
 ln -fs /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications
 
