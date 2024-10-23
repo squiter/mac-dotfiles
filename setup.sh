@@ -35,6 +35,9 @@ brew bundle
 yabai --start-service
 skhd --start-service
 
+# Git-lfs installation
+git lfs install
+
 # Configuring ASDF
 . $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
 
