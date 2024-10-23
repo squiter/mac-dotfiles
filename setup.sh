@@ -156,7 +156,6 @@ install_cask_if_needed spotify
 install_cask_if_needed todoist
 # install_cask_if_needed zoom
 install_cask_if_needed easydict
-install_cask_if_needed monitorcontrol
 
 ## Emacs
 brew tap d12frosted/emacs-plus
