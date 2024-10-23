@@ -28,63 +28,14 @@ else
     brew update
 fi
 
-install_if_needed() {
-    local binary=$1
-    local package=${2:-$1}
-    if [[ -e "/opt/homebrew/bin/${binary}" || -L "/opt/homebrew/bin/${binary}" || -e "/opt/homebrew/etc/${binary}" || -L "/opt/homebrew/etc/${binary}" ]]; then
-        echo "${1} already installed..."
-    else
-        echo "installing ${package}..."
-        brew install $package
-    fi
-}
+# Installing all dependencies from Brewfile
+brew bundle
 
-install_cask_if_needed() {
-    local package=${1}
-    if [[ -e "/opt/homebrew/Caskroom/${package}" ]]; then
-        echo "${1} already installed..."
-    else
-        echo "installing ${package}..."
-        brew install --cask $package
-    fi
-}
-
-install_if_needed asdf
-install_if_needed aws awscli
-install_if_needed bash
-install_if_needed bash_completion bash-completion
-install_if_needed bat
-install_if_needed bw bitwarden-cli
-install_if_needed direnv
-install_if_needed bb borkdude/brew/babashka
-install_if_needed fzf
-install_if_needed gcat coreutils
-install_if_needed gh
-install_if_needed git
-install_if_needed gnupg
-install_if_needed jq
-install_if_needed lsd
-install_if_needed pinentry-mac
-install_if_needed rg ripgrep
-# ffmpeg bundle
-install_if_needed pandoc
-install_if_needed rga
-install_if_needed poppler
-install_if_needed ffmpeg
-# ffmpeg bundle finished
-install_if_needed stow
-install_if_needed ag the_silver_searcher
-install_if_needed terraform
-install_if_needed tldr
-install_if_needed tree
-install_if_needed wget
-install_if_needed wx-config wxwidgets
-install_if_needed yabai koekeishiya/formulae/yabai
-install_if_needed skhd koekeishiya/formulae/skhd
-
+# Yabai & skhd services
 yabai --start-service
 skhd --start-service
 
+# Configuring ASDF
 . $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
 
 asdf_folder="$HOME/.asdf"
@@ -131,42 +82,8 @@ if [[ "$(command -v elixir)" != *"asdf"* ]]; then
     asdf global elixir 1.17.3-otp-26
 fi
 
-install_if_needed pipx
-
-install_cask_if_needed appcleaner
-install_cask_if_needed arc
-install_cask_if_needed bitwarden
-install_cask_if_needed docker
-install_cask_if_needed dropbox
-install_cask_if_needed font-fira-code
-install_cask_if_needed font-hack-nerd-font
-install_cask_if_needed font-iosevka
-install_cask_if_needed height
-install_cask_if_needed iterm2
-install_cask_if_needed jordanbaird-ice
-install_cask_if_needed latest
-install_cask_if_needed obs
-install_cask_if_needed raycast
-install_cask_if_needed rescuetime
-install_cask_if_needed roam-research
-install_cask_if_needed rocket
-install_cask_if_needed shottr
-# install_cask_if_needed slack
-install_cask_if_needed spotify
-install_cask_if_needed todoist
-# install_cask_if_needed zoom
-install_cask_if_needed easydict
-
-## Emacs
-brew tap d12frosted/emacs-plus
-install_if_needed emacs emacs-plus@29
-
-install_if_needed ispell
-install_if_needed aspell
-install_if_needed wakatime-cli
-
+## Emacs Congig
 ln -fs /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications
-
 
 if [[ -e /Applications/Emacs.app ]]; then
     echo "Emacs.app already at /Applications"
