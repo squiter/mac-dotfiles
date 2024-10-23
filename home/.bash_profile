@@ -32,7 +32,7 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-export CDPATH=".:~/:~/Downloads:~/dev/code:~/dev/nu:~/dev/finbits"
+export CDPATH=".:~/:~/Downloads:~/dev/code:~/dev/nu:~/dev/finbits:~/dev/remote"
 
 # Ignore case
 shopt -s cdspell
