@@ -120,4 +120,5 @@ fi
 cd $code_dir/mac-dotfiles
 stow --verbose --target=$HOME home
 
+echo "You could need some apps from https://sindresorhus.com/apps that was not available at Homebrew"
 echo "Setup completed!"
