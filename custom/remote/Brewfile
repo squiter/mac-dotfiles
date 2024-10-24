@@ -1,0 +1,5 @@
+# Tiger Dependency
+brew "libpq"
+
+cask "notion"
+cask "loom"
