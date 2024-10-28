@@ -2,12 +2,15 @@
 
 # Setup new Apps only on the same day of addition
 asdf_folder="$HOME/.asdf"
+
 original_file=$HOME/dev/code/mac-dotfiles/home/.bash_remote_customs
 remote_brewfile=$HOME/dev/code/mac-dotfiles/custom/remote/Brewfile
-last_modified=$(stat -f %Sa -t %Y-%m-%d $original_file)
+
+last_original_modified=$(stat -f %Sa -t %Y-%m-%d $original_file)
+last_brew_modified=$(stat -f %Sa -t %Y-%m-%d $remote_brewfile)
 today=$(date -I)
 
-if [ "${last_modified}" == "${today}" ]; then
+if [[ "${last_modified}" == "${today}" || "${last_brew_modified}" == "${today}" ]]; then
     echo "==> .bash_remote_customs was modified today, running setup scripts..."
 
     # Ensure you're using the correct Kubectl version

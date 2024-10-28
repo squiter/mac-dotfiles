@@ -3,3 +3,5 @@ brew "libpq"
 
 cask "notion"
 cask "loom"
+cask "postman"
+cask "dbeaver-community"
