@@ -100,3 +100,12 @@ source_if_exists /Users/squiter/.hishtory/config.sh
 
 # Created by `pipx` on 2024-07-19 14:23:00
 export PATH="$PATH:/Users/squiter/.local/bin"
+
+# Elixir
+ecto_rebuild_db () {
+    env="${1:-dev}"
+    echo "==> Rebuilding database for ${env} environment..."
+    MIX_ENV=$env mix ecto.drop
+    MIX_ENV=$env mix ecto.create
+    MIX_ENV=$env mix ecto.migrate
+}
