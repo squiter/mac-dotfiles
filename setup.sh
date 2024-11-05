@@ -104,6 +104,17 @@ cd $code_dir/emacs-dotfiles
 stow --verbose --target=$HOME dotfiles
 cd -
 
+echo "Synchronizing Bitwarden Vault"
+bw sync
+
+init_secrets_el_file="${code_dir}/emacs-dotfiles/dotfiles/.emacs.d/conf/init-secrets.el"
+if [ ! -f "${init_secrets_el_file}" ]; then
+    echo "Fetching init-secrets.el from Bitwarden..."
+    bw get notes init-secrets.el > $init_secrets_el_file
+else
+    echo "init-secrets.el already configured..."
+fi
+
 ## Setup Bash
 if [ "${SHELL}" == "/opt/homebrew/bin/bash" ]; then
     echo "Homebrew bash is your default shell!"
@@ -119,6 +130,14 @@ fi
 ## Create the symlinks of my dotfiles
 cd $code_dir/mac-dotfiles
 stow --verbose --target=$HOME home
+
+authinfo_file="${HOME}/.authinfo"
+if [ ! -f "${authinfo_file}" ]; then
+    echo "Fetching authfinfo from Bitwarden..."
+    bw get notes authinfo > $authinfo_file
+else
+    echo "authfinfo already configured..."
+fi
 
 echo "You could need some apps from https://sindresorhus.com/apps that was not available at Homebrew"
 echo "Setup completed!"
