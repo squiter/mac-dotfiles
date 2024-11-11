@@ -107,10 +107,28 @@ cd -
 echo "Synchronizing Bitwarden Vault"
 bw sync
 
+# Defining a function to get BW notes in a safe way
+copy_bw_notes_to () {
+    local secret=$1
+    local target=$2
+
+    echo "==> Getting ${secret} from Bitwarden and saving at ${target}..."
+    bw get notes $secret > /tmp/$secret
+
+    if [ -s /tmp/$secret ]; then
+        echo "Coping content to ${target}..."
+        cat /tmp/$secret > $target
+        rm /tmp/$secret
+    else
+        echo "/tmp/${secret} is empty!"
+        return 1
+    fi
+}
+
 init_secrets_el_file="${code_dir}/emacs-dotfiles/dotfiles/.emacs.d/conf/init-secrets.el"
 if [ ! -f "${init_secrets_el_file}" ]; then
     echo "Fetching init-secrets.el from Bitwarden..."
-    bw get notes init-secrets.el > $init_secrets_el_file
+    copy_bw_notes_to init-secrets.el $init_secrets_el_file
 else
     echo "init-secrets.el already configured..."
 fi
@@ -134,7 +152,7 @@ stow --verbose --target=$HOME home
 authinfo_file="${HOME}/.authinfo"
 if [ ! -f "${authinfo_file}" ]; then
     echo "Fetching authfinfo from Bitwarden..."
-    bw get notes authinfo > $authinfo_file
+    copy_bw_notes_to authinfo $authinfo_file
 else
     echo "authfinfo already configured..."
 fi
