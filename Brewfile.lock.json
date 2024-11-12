@@ -256,7 +256,7 @@
         }
       },
       "borkdude/brew/babashka": {
-        "version": "1.12.194",
+        "version": "1.12.195",
         "bottle": false
       },
       "coreutils": {
@@ -1541,7 +1541,7 @@
         }
       },
       "raycast": {
-        "version": "1.85.1",
+        "version": "1.85.2",
         "options": {
           "full_name": "raycast"
         }
@@ -1586,6 +1586,12 @@
         "version": "2.10.1",
         "options": {
           "full_name": "easydict"
+        }
+      },
+      "itsycal": {
+        "version": "0.15.5",
+        "options": {
+          "full_name": "itsycal"
         }
       }
     }
