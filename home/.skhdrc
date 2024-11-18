@@ -185,7 +185,7 @@ ctrl + shift - 9             : yabai -m window --space 9
 ctrl + shift - 0             : yabai -m window --space 10
 
 # restart
-ctrl + alt + cmd - r         : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai" && skhd --reload
+ctrl + alt + cmd - r         : yabai --restart-service && skhd --reload
 
 # -- start/stop yabai
 ctrl + alt + cmd + shift - y : brew services stop yabai
