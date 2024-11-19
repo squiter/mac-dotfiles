@@ -157,5 +157,12 @@ else
     echo "authfinfo already configured..."
 fi
 
+if [ ! -f ~/.config/iterm2/shades-of-purple.itermcolors ]; then
+    echo "Fetching shades-of-purple.itermcolors from Github..."
+    curl https://raw.githubusercontent.com/ahmadawais/shades-of-purple-iterm2/master/shades-of-purple.itermcolors > ~/.config/iterm2/shades-of-purple.itermcolors
+else
+    echo "shades-of-purple.itermcolors already configured..."
+fi
+
 echo "You could need some apps from https://sindresorhus.com/apps that was not available at Homebrew"
 echo "Setup completed!"
