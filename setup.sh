@@ -147,7 +147,7 @@ fi
 
 ## Create the symlinks of my dotfiles
 cd $code_dir/mac-dotfiles
-stow --verbose --target=$HOME home
+stow --verbose --no-folding --target=$HOME home
 
 authinfo_file="${HOME}/.authinfo"
 if [ ! -f "${authinfo_file}" ]; then

@@ -1,0 +1,104 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "alt+.",
+        "command": "editor.action.revealDefinition",
+        "when": "editorHasDefinitionProvider"
+    },
+    {
+        "key": "ctrl+c g",
+        "command": "magit.status"
+    },
+    {
+        "key": "alt+x g",
+        "command": "-magit.status"
+    },
+    {
+        "key": "ctrl+x shift+\\",
+        "command": "workbench.action.splitEditorRight",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+x 3",
+        "command": "-workbench.action.splitEditorRight",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+x -",
+        "command": "workbench.action.splitEditorDown",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+x 2",
+        "command": "-workbench.action.splitEditorDown",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "alt+o",
+        "command": "workbench.action.navigateEditorGroups",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+x o",
+        "command": "-workbench.action.navigateEditorGroups",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+=",
+        "command": "editor.action.smartSelect.expand",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+right",
+        "command": "-editor.action.smartSelect.expand",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+,",
+        "command": "workbench.action.navigateBackInNavigationLocations"
+    },
+    {
+        "key": "ctrl+t r",
+        "command": "exunit.runPrevious"
+    },
+    {
+        "key": "ctrl+t a",
+        "command": "exunit.runAll"
+    },
+    {
+        "key": "ctrl+t u",
+        "command": "exunit.runAllInUmbrella"
+    },
+    {
+        "key": "ctrl+t .",
+        "command": "exunit.runTest"
+    },
+    {
+        "key": "ctrl+t f",
+        "command": "exunit.runTestFile"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "editor.action.insertLineAfter",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "cmd+enter",
+        "command": "-editor.action.insertLineAfter",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+c d",
+        "command": "editor.action.copyLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+alt+down",
+        "command": "-editor.action.copyLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+p",
+        "command": "editor.action.referenceSearch.trigger"
+    }
+]

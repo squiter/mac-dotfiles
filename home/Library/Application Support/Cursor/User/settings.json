@@ -1,0 +1,12 @@
+{
+    "window.commandCenter": true,
+    "workbench.colorTheme": "Shades of Purple (Super Dark)",
+    "editor.fontSize": 14,
+    "editor.fontFamily": "Fire Code, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontVariations": true,
+    "editor.fontLigatures": true,
+    "git.autofetch": true,
+    "explorer.confirmDelete": false,
+    "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
+    "editor.accessibilitySupport": "off"
+}
