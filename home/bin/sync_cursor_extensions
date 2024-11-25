@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [[ $(command -v cursor) ]]; then
+    echo "Syncing Cursor extensions..."
+    required="${HOME}/dev/code/mac-dotfiles/cursor_extensions"
+    installed="/tmp/cursor_installed"
+
+    cursor --list-extensions | sort > "${installed}"
+
+    comm -13 "${installed}" "${required}" | xargs -I {} cursor --install-extension {}
+
+    echo "Syncing Cursor extensions... done"
+else
+    echo "Cursor is not installed"
+fi
