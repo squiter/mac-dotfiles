@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Saving Cursor extensions..."
+cursor --list-extensions > "$HOME"/dev/code/mac-dotfiles/cursor_extensions

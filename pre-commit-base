@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+dotfiles_dir="$HOME"/dev/code/mac-dotfiles
+if [ "$PWD" = "$dotfiles_dir" ]; then
+    save_cursor_extensions
+    git add cursor_extensions
+fi

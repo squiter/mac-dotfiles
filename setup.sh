@@ -145,7 +145,12 @@ else
     echo "Shell setted to (homebrew) bash successefully!"
 fi
 
-## Create the symlinks of my dotfiles
+## Setup pre-commit hook to save Cursor extensions
+if [ ! -f "${code_dir}/mac-dotfiles/.git/hooks/pre-commit" ]; then
+    cp $code_dir/mac-dotfiles/pre-commit-base ${code_dir}/mac-dotfiles/.git/hooks/pre-commit
+fi
+
+## Create the symlinks of my dotfiles (without linking directories)
 cd $code_dir/mac-dotfiles
 stow --verbose --no-folding --target=$HOME home
 
