@@ -8,5 +8,6 @@
     "git.autofetch": true,
     "explorer.confirmDelete": false,
     "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
-    "editor.accessibilitySupport": "off"
+    "editor.accessibilitySupport": "off",
+    "editor.formatOnSave": true
 }
