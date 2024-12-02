@@ -9,5 +9,6 @@
     "explorer.confirmDelete": false,
     "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
     "editor.accessibilitySupport": "off",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "terminal.integrated.scrollback": 100000
 }
