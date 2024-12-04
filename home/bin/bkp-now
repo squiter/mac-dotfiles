@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+echo "==> Starting the BKP process"
+git add .
+message=`date`
+git commit -m "$message"
+git push origin
+echo "==> BKP Complete"
