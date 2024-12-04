@@ -6,7 +6,7 @@
   email = brunno@brunno.me
   signingkey = FE6A1FA1A86BDBC5
 
-[includeIf "gitdir:/Users/brunno.dossantosleite/dev/**"]
+[includeIf "gitdir:/Users/brunno.dossantosleite/**"]
   path = ~/dev/remote/.gitconfig
 
 [alias]
