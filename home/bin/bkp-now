@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 echo "==> Starting the BKP process"
-git add .
+git_cmd=/opt/homebrew/bin/git
+$git_cmd add .
 message=`date`
-git commit -m "$message"
-git push origin
+$git_cmd commit -m "${message}"
+$git_cmd push origin
 echo "==> BKP Complete"
