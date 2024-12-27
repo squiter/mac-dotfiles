@@ -1,0 +1,14 @@
+window-padding-x = 15
+window-padding-y = 15
+background-opacity = 0.6
+background-blur-radius = 20
+theme = shades-of-purple
+
+macos-option-as-alt = true
+macos-titlebar-style = hidden
+
+link-url = true
+ 
+keybind = global:super+`=toggle_quick_terminal
+keybind = ctrl+x>shift+\=new_split:right
+keybind = ctrl+x>-=new_split:down
