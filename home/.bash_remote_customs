@@ -36,7 +36,7 @@ export PATH=$PATH:$HOMEBREW_PREFIX/opt/libpq/bin
 export AWS_PROFILE=sts
 
 # Aliases to deal with Netherlands tests at Neo
-alias neo-nld-tests="mix cmd --app netherlands mix test --color"
+alias neo-nld-tests="MIX_ENV=test mix do --app netherlands test"
 alias neo-nld-e2e="MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/netherlands"
 alias neo-nld-api-tests="mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/netherlands"
 alias neo-nld-all-tests="neo-nld-tests && neo-nld-e2e && neo-nld-api-tests"
