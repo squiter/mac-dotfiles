@@ -14,7 +14,26 @@ macos-option-as-alt = true
 macos-titlebar-style = hidden
 
 link-url = true
- 
+
 keybind = global:super+`=toggle_quick_terminal
+
+# Splits
 keybind = ctrl+x>shift+\=new_split:right
 keybind = ctrl+x>-=new_split:down
+keybind = ctrl+x>b=equalize_splits
+keybind = ctrl+shift+;=resize_split:left,25
+keybind = ctrl+shift+j=resize_split:right,25
+keybind = ctrl+shift+k=resize_split:down,25
+keybind = ctrl+shift+l=resize_split:up,25
+keybind = alt+o=goto_split:next
+keybind = alt+shift+o=goto_split:previous
+
+keybind = ctrl+x>r=reload_config
+
+# To simulate a search
+# This will paste a file that you can pipe to fzf or less
+keybind = ctrl+f=write_scrollback_file:paste
+
+# Emacs Like Keybinds
+keybind = alt+w=copy_to_clipboard
+keybind = ctrl+y=paste_from_clipboard
