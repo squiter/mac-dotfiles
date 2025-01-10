@@ -38,51 +38,29 @@ skhd --start-service
 # Git-lfs installation
 git lfs install
 
-# Configuring ASDF
-. $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
-
-asdf_folder="$HOME/.asdf"
-
-if [ ! -d "$asdf_folder/plugins/nodejs" ]; then
-    asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-fi
-
-if [ ! -d "$asdf_folder/plugins/yarn" ]; then
-    asdf plugin add yarn
-fi
-
-if [ ! -d "$asdf_folder/plugins/erlang" ]; then
-    asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
-fi
-
-if [ ! -d "$asdf_folder/plugins/elixir" ]; then
-   asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
-fi
-
-asdf plugin update --all
-
-if [[ "$(command -v node)" != *"asdf"* ]]; then
+# Configuring Mise
+if [[ "$(command -v node)" != *"mise"* ]]; then
     echo "Installing nodejs..."
-    asdf install nodejs 22.2.0
-    asdf global nodejs 22.2.0
+    mise install nodejs@22.2.0
+    mise use --global nodejs@22.2.0
 fi
 
-if [[ "$(command -v yarn)" != *"asdf"* ]]; then
+if [[ "$(command -v yarn)" != *"mise"* ]]; then
     echo "Installing yarn..."
-    asdf install yarn 1.22.19
-    asdf global yarn 1.22.19
+    mise install yarn@1.22.19
+    mise use --global yarn@1.22.19
 fi
 
-if [[ "$(command -v erl)" != *"asdf"* ]]; then
+if [[ "$(command -v erl)" != *"mise"* ]]; then
     echo "Installing erlang..."
-    asdf install erlang 26.2.5
-    asdf global erlang 26.2.5
+    mise install erlang@27.2
+    mise use --glocal erlang@27.2
 fi
 
-if [[ "$(command -v elixir)" != *"asdf"* ]]; then
+if [[ "$(command -v elixir)" != *"mise"* ]]; then
     echo "Installing elixir..."
-    asdf install elixir 1.17.3-otp-26
-    asdf global elixir 1.17.3-otp-26
+    mise install elixir@1.18.1
+    mise use --global elixir@1.18.1
 fi
 
 ## Emacs Congig

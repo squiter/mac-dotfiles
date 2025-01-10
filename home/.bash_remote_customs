@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 # Setup new Apps only on the same day of addition
-asdf_folder="$HOME/.asdf"
-
 original_file=$HOME/dev/code/mac-dotfiles/home/.bash_remote_customs
 remote_brewfile=$HOME/dev/code/mac-dotfiles/custom/remote/Brewfile
 
@@ -10,18 +8,13 @@ last_original_modified=$(stat -f %Sa -t %Y-%m-%d $original_file)
 last_brew_modified=$(stat -f %Sa -t %Y-%m-%d $remote_brewfile)
 today=$(date -I)
 
-if [[ "${last_modified}" == "${today}" || "${last_brew_modified}" == "${today}" ]]; then
+if [[ "${last_original_modified}" == "${today}" || "${last_brew_modified}" == "${today}" ]]; then
     echo "==> .bash_remote_customs was modified today, running setup scripts..."
 
-    # Ensure you're using the correct Kubectl version
-    if [ ! -d "$asdf_folder/plugins/kubectl" ]; then
-        asdf plugin-add kubectl https://github.com/asdf-community/asdf-kubectl.git
-    fi
-
-    if [[ "$(command -v kubectl)" != *"asdf"* ]]; then
+    if [[ "$(command -v kubectl)" != *"mise"* ]]; then
         echo "Installing Kubectl..."
-        asdf install kubectl 1.28.9
-        asdf global kubectl 1.28.9
+        mise install kubectl@1.28.9
+        mise use --global kubectl@1.28.9
     fi
 
     brew bundle --file=$remote_brewfile
