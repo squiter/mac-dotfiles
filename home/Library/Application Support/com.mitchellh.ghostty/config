@@ -32,7 +32,7 @@ keybind = ctrl+x>r=reload_config
 
 # To simulate a search
 # This will paste a file that you can pipe to fzf or less
-keybind = ctrl+f=write_scrollback_file:paste
+keybind = ctrl+shift+f=write_scrollback_file:paste
 
 # Emacs Like Keybinds
 keybind = alt+w=copy_to_clipboard
