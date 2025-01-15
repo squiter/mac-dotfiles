@@ -40,8 +40,10 @@ if status is-interactive
     set -x FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS --bind ctrl-k:kill-line,ctrl-g:abort"
 
     # Some aliases gotten from ~/.bash_aliases
-    alias ls='lsd'
-    alias lslast='ls -lt | head'
+    abbr -a ls 'lsd'
+    abbr -a lslast 'ls -lt | head'
+
+    # Must be an alias because it's used on a keybind
     alias all_projects="find ~/dev -maxdepth 2 -type d -mindepth 2"
 
     # Elixir
@@ -55,10 +57,10 @@ if status is-interactive
     end
 
     # Remote aliases
-    alias neo-nld-tests="MIX_ENV=test mix do --app netherlands test"
-    alias neo-nld-e2e="MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/netherlands"
-    alias neo-nld-api-tests="mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/netherlands"
-    alias neo-nld-all-tests="neo-nld-tests && neo-nld-e2e && neo-nld-api-tests"
+    abbr -a neo-nld-tests "MIX_ENV=test mix do --app netherlands test"
+    abbr -a neo-nld-e2e "MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/netherlands"
+    abbr -a neo-nld-api-tests "mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/netherlands"
+    abbr -a neo-nld-all-tests "MIX_ENV=test mix do --app netherlands test && MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/netherlands && mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/netherlands"
 
     # Keybinds
     function fish_user_key_bindings
