@@ -2,10 +2,12 @@ if status is-interactive
     function fish_prompt
         set -l last_status $status
         if test $last_status -ne 0
-            set stat (set_color red)"[💩]"(set_color normal)
+            set stat (set_color red)"💩"(set_color normal)
+        else
+            set stat "🐠"
         end
 
-        string join '' -- $stat 🐠 ' ' (set_color green) (prompt_pwd) (set_color normal) (fish_git_prompt) '> '
+        string join '' -- $stat ' ' (set_color green) '[📁 ' (prompt_pwd)']' (set_color normal) (fish_git_prompt) '> '
     end
 
     # Homebrew
