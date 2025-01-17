@@ -112,15 +112,15 @@ else
 fi
 
 ## Setup Bash
-if [ "${SHELL}" == "/opt/homebrew/bin/bash" ]; then
-    echo "Homebrew bash is your default shell!"
+if [ "${SHELL}" == "/opt/homebrew/bin/fish" ]; then
+    echo "Homebrew fish 🐠 is your default shell!"
 else
-    echo "Setting your default shell to (homebrew) bash..."
+    echo "Setting your default shell to (homebrew) fish..."
     if ! cat /etc/shells | grep -q "homebrew"; then
-        echo "/usr/homebrew/bin/bash" | sudo tee -a /etc/shells
+        echo "/usr/homebrew/bin/fish" | sudo tee -a /etc/shells
     fi
-    sudo chsh -s /opt/homebrew/bin/bash "$USER"
-    echo "Shell setted to (homebrew) bash successefully!"
+    sudo chsh -s /opt/homebrew/bin/fish "$USER"
+    echo "Shell setted to (homebrew) fish successefully!"
 fi
 
 ## Setup pre-commit hook to save Cursor extensions
