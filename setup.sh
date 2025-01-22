@@ -64,7 +64,7 @@ if [[ "$(command -v elixir)" != *"mise"* ]]; then
 fi
 
 ## Emacs Congig
-ln -fs /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications
+ln -fs /opt/homebrew/opt/emacs-plus@30/Emacs.app /Applications
 
 if [[ -e /Applications/Emacs.app ]]; then
     echo "Emacs.app already at /Applications"
@@ -102,14 +102,6 @@ copy_bw_notes_to () {
         return 1
     fi
 }
-
-init_secrets_el_file="${code_dir}/emacs-dotfiles/dotfiles/.emacs.d/conf/init-secrets.el"
-if [ ! -f "${init_secrets_el_file}" ]; then
-    echo "Fetching init-secrets.el from Bitwarden..."
-    copy_bw_notes_to init-secrets.el $init_secrets_el_file
-else
-    echo "init-secrets.el already configured..."
-fi
 
 ## Setup Bash
 if [ "${SHELL}" == "/opt/homebrew/bin/fish" ]; then

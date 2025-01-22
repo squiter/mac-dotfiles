@@ -39,7 +39,7 @@ brew "ffmpeg"
 
 ## Emacs & Dependencies
 tap "d12frosted/emacs-plus"
-brew "emacs-plus@29"
+brew "emacs-plus@30"
 
 brew "ispell"
 brew "aspell"
