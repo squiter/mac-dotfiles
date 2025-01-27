@@ -115,6 +115,12 @@ else
     echo "Shell setted to (homebrew) fish successefully!"
 fi
 
+colima_fish_completion="${HOME}/.config/fish/completions/colima.fish"
+if [ ! -f "${colima_fish_completion}" ]; then
+    echo "Setting up 🐠 completion for Colima..."
+    colima completion fish > $colima_fish_completion
+fi
+
 ## Setup pre-commit hook to save Cursor extensions
 if [ ! -f "${code_dir}/mac-dotfiles/.git/hooks/pre-commit" ]; then
     cp $code_dir/mac-dotfiles/pre-commit-base ${code_dir}/mac-dotfiles/.git/hooks/pre-commit
