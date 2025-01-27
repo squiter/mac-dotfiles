@@ -103,7 +103,7 @@ copy_bw_notes_to () {
     fi
 }
 
-## Setup Bash
+## Setup Fish
 if [ "${SHELL}" == "/opt/homebrew/bin/fish" ]; then
     echo "Homebrew fish 🐠 is your default shell!"
 else

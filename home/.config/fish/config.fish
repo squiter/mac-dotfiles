@@ -32,6 +32,9 @@ if status is-interactive
         fish_add_path -aP $HOME/bin
     end
 
+    # Used for ElixirLS
+    fish_add_path -aP $HOME/.local/bin
+
     # Set my key as default
     set -x GPGKEY A86BDBC5
 
