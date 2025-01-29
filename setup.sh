@@ -83,6 +83,9 @@ stow --verbose --target=$HOME dotfiles
 cd -
 
 echo "Synchronizing Bitwarden Vault"
+if [[ ! $(bw login --check) ]]; then
+    bw login
+fi
 bw sync
 
 # Defining a function to get BW notes in a safe way
@@ -123,7 +126,7 @@ fi
 
 ## Setup pre-commit hook to save Cursor extensions
 if [ ! -f "${code_dir}/mac-dotfiles/.git/hooks/pre-commit" ]; then
-    cp $code_dir/mac-dotfiles/pre-commit-base ${code_dir}/mac-dotfiles/.git/hooks/pre-commit
+    ln -sf $code_dir/mac-dotfiles/pre-commit-base ${code_dir}/mac-dotfiles/.git/hooks/pre-commit
 fi
 
 . $code_dir/mac-dotfiles/home/bin/sync_cursor_extensions
