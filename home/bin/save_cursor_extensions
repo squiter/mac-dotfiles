@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 
-echo "Saving Cursor extensions..."
-cursor --list-extensions | sort > "$HOME"/dev/code/mac-dotfiles/cursor_extensions
+if [[ $(command -v cursor) ]]; then
+    echo "Saving Cursor extensions..."
+    cursor --list-extensions | sort > "$HOME"/dev/code/mac-dotfiles/cursor_extensions
+else
+    echo "Cursor is not installed"
+fi
