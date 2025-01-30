@@ -54,7 +54,7 @@ fi
 if [[ "$(command -v erl)" != *"mise"* ]]; then
     echo "Installing erlang..."
     mise install erlang@27.2
-    mise use --glocal erlang@27.2
+    mise use --global erlang@27.2
 fi
 
 if [[ "$(command -v elixir)" != *"mise"* ]]; then
@@ -118,9 +118,11 @@ else
     echo "Shell setted to (homebrew) fish successefully!"
 fi
 
-colima_fish_completion="${HOME}/.config/fish/completions/colima.fish"
+colima_fish_completion_dir="${HOME}/.config/fish/completions"
+colima_fish_completion="${colima_fish_completion_dir}/colima.fish"
 if [ ! -f "${colima_fish_completion}" ]; then
     echo "Setting up 🐠 completion for Colima..."
+    mkdir $colima_fish_completion_dir
     colima completion fish > $colima_fish_completion
 fi
 
