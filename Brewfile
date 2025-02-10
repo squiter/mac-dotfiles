@@ -31,10 +31,6 @@ brew "tree"
 brew "wget"
 brew "wxwidgets"
 
-# Yabai
-brew "koekeishiya/formulae/yabai"
-brew "koekeishiya/formulae/skhd"
-
 # ffmpeg bundle
 brew "pandoc"
 brew "rga"
@@ -45,6 +41,10 @@ brew "ffmpeg"
 tap "d12frosted/emacs-plus"
 brew "emacs-plus@30"
 
+## JankieBorders
+tap "FelixKratz/formulae"
+brew "borders"
+
 brew "ispell"
 brew "aspell"
 brew "wakatime-cli"
@@ -52,6 +52,7 @@ brew "wakatime-cli"
 # Cask Apps
 # cask "slack"
 # cask "zoom"
+cask "nikitabobko/tap/aerospace"
 cask "appcleaner"
 cask "arc"
 cask "beekeeper-studio"

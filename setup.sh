@@ -31,9 +31,8 @@ fi
 # Installing all dependencies from Brewfile
 brew bundle
 
-# Yabai & skhd services
-yabai --start-service
-skhd --start-service
+# Adding borders to windows
+brew services start borders
 
 # Git-lfs installation
 git lfs install
