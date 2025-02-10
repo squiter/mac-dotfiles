@@ -13,6 +13,15 @@ if status is-interactive
     # Homebrew
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
+    # https://docs.brew.sh/Shell-Completion
+    if test -d (brew --prefix)"/share/fish/completions"
+        set -p fish_complete_path (brew --prefix)/share/fish/completions
+    end
+
+    if test -d (brew --prefix)"/share/fish/vendor_completions.d"
+        set -p fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
+    end
+
     # Ensure gpg-agent was running
     eval "$(gpg-agent --daemon &>/dev/null)"
 
