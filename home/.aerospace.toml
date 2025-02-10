@@ -102,7 +102,7 @@ automatically-unhide-macos-hidden-apps = true
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     ctrl-alt-cmd-backslash = 'layout tiles horizontal vertical'
-    ctrl-alt-cmd-minus = 'layout accordion horizontal vertical'
+    ctrl-alt-cmd-shift-backslash = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     ctrl-alt-cmd-h = 'focus left'
@@ -119,8 +119,8 @@ automatically-unhide-macos-hidden-apps = true
     ctrl-alt-cmd-f = 'fullscreen'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-    ctrl-cmd-minus = 'resize smart -50'
-    ctrl-cmd-equal = 'resize smart +50'
+    ctrl-alt-cmd-minus = 'resize smart -50'
+    ctrl-alt-cmd-shift-minus = 'resize smart +50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     ctrl-1 = 'workspace 1'
@@ -150,9 +150,7 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-    alt-shift-semicolon = 'mode service'
-
-
+    ctrl-alt-cmd-semicolon = 'mode service'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -169,7 +167,3 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-j = ['join-with down', 'mode main']
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
-
-    down = 'volume down'
-    up = 'volume up'
-    shift-down = ['volume set 0', 'mode main']
