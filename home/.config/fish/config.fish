@@ -58,6 +58,9 @@ if status is-interactive
     # Must be an alias because it's used on a keybind
     alias all_projects="find ~/dev -maxdepth 2 -type d -mindepth 2"
 
+    # Direnv
+    direnv hook fish | source
+
     # Elixir
     function ecto_rebuild_db
         set env $argv[1]
