@@ -74,6 +74,11 @@ if status is-interactive
     abbr -a neo-nld-api-tests "mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/netherlands"
     abbr -a neo-nld-all-tests "MIX_ENV=test mix do --app netherlands test && MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/netherlands && mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/netherlands"
 
+    abbr -a neo-ca-tests "MIX_ENV=test mix do --app canada test"
+    abbr -a neo-ca-e2e "MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/canada"
+    abbr -a neo-ca-api-tests "mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/canada"
+    abbr -a neo-ca-all-tests "MIX_ENV=test mix do --app canada test && MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/canada && mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/canada"
+
     # Keybinds
     function fish_user_key_bindings
         bind \cxo 'cd $(all_projects | fzf); commandline -f repaint'
