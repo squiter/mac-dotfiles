@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo "==> Updating dotfiles..."
+cd ~/dev/code/mac-dotfiles
+./setup.sh
+cd -
+echo "==> Dotfiles updated successfully"
