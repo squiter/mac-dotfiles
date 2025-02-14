@@ -25,7 +25,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
-accordion-padding = 30
+accordion-padding = 60
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -150,23 +150,23 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-    ctrl-alt-cmd-semicolon = 'mode service'
+    ctrl-alt-cmd-m = 'mode service'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
-    esc = ['reload-config', 'mode main']
-    r = ['flatten-workspace-tree', 'mode main'] # reset layout
+    r = ['reload-config', 'mode main'] # [r]eload config
+    b = ['flatten-workspace-tree', 'mode main'] # [b]alance layout
     f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
     backspace = ['close-all-windows-but-current', 'mode main']
 
     # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
     #s = ['layout sticky tiling', 'mode main']
 
-    alt-shift-h = ['join-with left', 'mode main']
-    alt-shift-j = ['join-with down', 'mode main']
-    alt-shift-k = ['join-with up', 'mode main']
-    alt-shift-l = ['join-with right', 'mode main']
+    alt-h = ['join-with left', 'mode main']
+    alt-j = ['join-with down', 'mode main']
+    alt-k = ['join-with up', 'mode main']
+    alt-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
     if.window-title-regex-substring = 'Picture-in-Picture'
