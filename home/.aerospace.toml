@@ -156,6 +156,8 @@ automatically-unhide-macos-hidden-apps = true
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
     r = ['reload-config', 'mode main'] # [r]eload config
+    esc = ['reload-config', 'mode main'] # [r]eload config
+    ctrl-g = ['reload-config', 'mode main'] # [r]eload config
     b = ['flatten-workspace-tree', 'mode main'] # [b]alance layout
     f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
     backspace = ['close-all-windows-but-current', 'mode main']
