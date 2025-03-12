@@ -46,22 +46,30 @@
   untracked = cyan
 [push]
   default = simple
+  	autoSetupRemote = true
+	followTags = true
 [init]
   templatedir = ~/.git-templates
+	defaultBranch = main
 [magit]
   hideCampaign = true
 [commit]
   gpgsign = true
+	verbose = true
 [github]
   user = squiter
 [rerere]
-  enabled = true
+	enabled = true
+	autoupdate = true
 
 [merge]
-    conflictstyle = diff3
+	conflictStyle = zdiff3
 
 [diff]
-    colorMoved = default
+	colorMoved = plain
+	algorithm = histogram
+	mnemonicPrefix = true
+	renames = true
 
 [delta]
     navigate = true  # use n and N to move between diff sections
@@ -74,3 +82,17 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[help]
+	autoCorrect = prompt
+[pull]
+	rebase = true
