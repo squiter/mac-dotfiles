@@ -1,6 +1,6 @@
 if status is-interactive
     # AWS Config
-    set AWS_DEFAULT_PROFILE sts
+    set -xU AWS_DEFAULT_PROFILE 'sts'
 
     if not command -q remotectl
         echo "remotectl not found! Installing..."
