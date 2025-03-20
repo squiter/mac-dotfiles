@@ -1,0 +1,94 @@
+#/usr/bin/env bash
+
+set -euo pipefail
+
+freset='\e[0m'
+purple='\e[38;5;171m'
+red='\e[38;5;1m'
+green='\e[38;5;76m'
+tan='\e[38;5;3m'
+blue='\e[38;5;38m'
+blue_bold_underline='\e[38;5;38;1;4m'
+
+_dot="                               ."
+_dotdot="${_dot}."
+
+_less() {
+  local -r extension="${1:-}"
+  if [ -x "$(command -v bat)" ]; then
+    bat -p -l "$extension"
+  else
+    less -R
+  fi
+}
+
+_read() {
+  local -r path="$1"
+  local -r content="$2"
+  local -r extension="${path##*.}"
+  case $extension in
+    json) echo "$content" | jq -C . | _less;;
+    edn|clj|cljs) echo "$content" | nu cloj edn | _less;;
+    *) echo -e "$content" | _less "$extension";;
+  esac
+}
+
+_last_column() {
+  awk '{print $(NF)}'
+}
+
+_up() {
+  sed -E 's|(.*)/(.+)|\1|'
+}
+
+_format_lines() {
+  local -r lines="$(cat)"
+  while read -r line; do
+    local -r name="$(echo "$line" | awk '{print $(NF)}')"
+    # printf "${purple}${name}${freset}\n"
+    echo "$name" | _last_column
+  done <<< "$lines"
+}
+
+_fzf() {
+  fzf --reverse --ansi --tac --height 10 --inline-info
+}
+
+_with_one_ending_slash() {
+  local -r path="$1"
+  case "$path" in
+    s3://) echo "$path";;
+    s3:/) echo "${path}/";;
+    *//) echo "${path::-1}";;
+    */) echo "$path";;
+    *) echo "${path}/";;
+  esac
+}
+
+_loop() {
+  local -r pwd="$(_with_one_ending_slash "$1")"
+  echo -e "\033[1A"
+  printf "${purple}path:${freset} ${green}$pwd${freset}"
+
+  local -r result="$(aws s3 ls "$pwd")"
+  local -r lines="$(echo -e "${_dotdot}\n${result}" | _last_column)"
+  local -r line="$(echo "$lines" | sort -r | _fzf)"
+  local -r p="$(echo "$line" | _last_column)"
+  local -r next="${pwd}${p}"
+
+  if [[ "$p" == */ || "$pwd" == "s3://" ]]; then
+      _loop "$next"
+  elif [[ "$p" == ".." ]]; then
+      _loop "$(echo "$pwd" | _up)"
+  elif [ -z "${p:-}" ]; then
+      exit 1
+  else
+      printf "${purple}file:${freset} ${green}$next${freset}"
+      echo
+      _read "$next" "$(aws s3 cp "$next" -)"
+      echo
+      _loop "$pwd"
+  fi
+}
+
+_loop "s3://$(aws s3 ls | awk '{print $3}' | _fzf)"
