@@ -71,7 +71,9 @@ if status is-interactive
         MIX_ENV=$env mix ecto.migrate
     end
 
-    source_if_exists $HOME/.config/fish/remote.config.fish
+    if not string match --quiet --regex -- "Hyrule" $hostname
+       source_if_exists $HOME/.config/fish/remote.config.fish
+    end
 
     # Remote aliases
 
