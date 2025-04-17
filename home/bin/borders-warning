@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-borders active_color=0xffFAD000 inactive_color=0xffFAD000 width=9.0 blacklist="TinyPasture"
+borders active_color=0xffFAD000 inactive_color=0xffFAD000 width=9.0 blacklist="TinyPasture,ChatGPT"
