@@ -100,5 +100,9 @@
     {
         "key": "alt+p",
         "command": "editor.action.referenceSearch.trigger"
+    },
+    {
+        "key": "cmd+i",
+        "command": "composerMode.agent"
     }
 ]
