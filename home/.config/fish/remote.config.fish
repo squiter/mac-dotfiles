@@ -22,5 +22,5 @@ if status is-interactive
     abbr -a neo-ca-tests "MIX_ENV=test mix do --app canada test"
     abbr -a neo-ca-e2e "MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/canada"
     abbr -a neo-ca-api-tests "mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/canada"
-    abbr -a neo-ca-all-tests "MIX_ENV=test mix do --app canada test && MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/canada && mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/canada"
+    abbr -a neo-ca-all-tests "MIX_ENV=test mix do --app canada test && mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/canada && MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/canada"
 end
