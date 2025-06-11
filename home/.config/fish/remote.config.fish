@@ -23,4 +23,6 @@ if status is-interactive
     abbr -a neo-ca-e2e "MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/canada"
     abbr -a neo-ca-api-tests "mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/canada"
     abbr -a neo-ca-all-tests "MIX_ENV=test mix do --app canada test && mix test apps/neo_web/test/unit/neo_web/controllers/api/v1/canada && MIX_ENV=e2e mix test.e2e apps/neo_web/test/e2e/canada"
+
+    abbr -a morning-tiger "mix deps.get && mix gen.runtime.dev.secret && mix ecto.reset && mix feature_flags.pull staging && mix phx.server"
 end
