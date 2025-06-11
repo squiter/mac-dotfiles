@@ -1,6 +1,5 @@
 {
     "window.commandCenter": true,
-    "workbench.colorTheme": "Shades of Purple (Super Dark)",
     "editor.fontSize": 14,
     "editor.fontFamily": "Fire Code, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontVariations": true,
@@ -13,5 +12,9 @@
     "terminal.integrated.scrollback": 100000,
     "extensions.ignoreRecommendations": true,
     "lexical.server.releasePathOverride": "/Users/brunno.dossantosleite/dev/code/lexical/_build/dev/package/lexical",
-    "git.openRepositoryInParentFolders": "always"
+    "git.openRepositoryInParentFolders": "always",
+    "terminal.external.osxExec": "Ghostty.app",
+    "terminal.integrated.macOptionIsMeta": true,
+    "terminal.integrated.allowChords": false, // To allow ⌃C ⌃C to quit iex
+    "workbench.colorTheme": "Noctis Uva"
 }
