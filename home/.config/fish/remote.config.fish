@@ -13,6 +13,9 @@ if status is-interactive
         remotectl completion fish > $fish_complete_path[1]/remotectl.fish
     end
 
+    # PSQL load path
+    fish_add_path -aP $HOMEBREW_PREFIX/opt/libpq/bin
+
     # Loading the launchctl from binaries installed by Mise
     if not launchctl list | grep dev.remote.postgres &>/dev/null
         launchctl load ~/Library/LaunchAgents/dev.remote.postgres.mise.plist
