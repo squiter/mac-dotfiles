@@ -1,4 +1,31 @@
 if status is-interactive
+    set -x cmd_notification_threshold 15000
+
+    # Notify when long command finished
+    function __d12_prompt__check_duration
+        if test $CMD_DURATION
+            if test $CMD_DURATION -ge $cmd_notification_threshold
+                __d12_prompt__on_duration_exceeded $CMD_DURATION
+                __d12_prompt__notify_completion $CMD_DURATION
+            end
+        end
+        set CMD_DURATION 0
+    end
+
+    function __d12_prompt__on_duration_exceeded -a duration
+        set_color $fish_color_command
+        echo -esn '  ~> duration: '
+        set_color $fish_color_param
+        echo -es $duration ' ms'
+        set_color normal
+    end
+
+    function __d12_prompt__notify_completion -a duration
+        if command -v terminal-notifier > /dev/null
+            echo -es 'Finished in ' $duration ' ms' | terminal-notifier
+        end
+    end
+
     function fish_prompt
         set -l last_status $status
         if test $last_status -ne 0
@@ -6,6 +33,10 @@ if status is-interactive
         else
             set stat "🐠"
         end
+
+        set -l cmd_notification_threshold 15000
+
+        __d12_prompt__check_duration
 
         string join '' -- $stat ' ' (set_color green) '[📁 ' (prompt_pwd)']' (set_color normal) (fish_git_prompt) '> '
     end
@@ -72,10 +103,8 @@ if status is-interactive
     end
 
     if not string match --quiet --regex -- "Hyrule" $hostname
-       source_if_exists $HOME/.config/fish/remote.config.fish
+        source_if_exists $HOME/.config/fish/remote.config.fish
     end
-
-    # Remote aliases
 
     # Keybinds
     function fish_user_key_bindings
