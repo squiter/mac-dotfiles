@@ -13,6 +13,9 @@ if status is-interactive
         remotectl completion fish > $fish_complete_path[1]/remotectl.fish
     end
 
+    # Prepend "-m" the workbrew path before the default homebrew
+    fish_add_path -m /opt/workbrew/bin
+
     # PSQL load path
     fish_add_path -aP $HOMEBREW_PREFIX/opt/libpq/bin
 
