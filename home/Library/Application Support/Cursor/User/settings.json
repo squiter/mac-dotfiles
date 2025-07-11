@@ -16,5 +16,6 @@
     "terminal.external.osxExec": "Ghostty.app",
     "terminal.integrated.macOptionIsMeta": true,
     "terminal.integrated.allowChords": false, // To allow ⌃C ⌃C to quit iex
-    "workbench.colorTheme": "Noctis Uva"
+    "workbench.colorTheme": "Noctis Uva",
+    "window.zoomLevel": 0.6
 }
