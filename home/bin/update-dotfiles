@@ -2,6 +2,13 @@
 
 echo "==> Updating dotfiles..."
 cd ~/dev/code/mac-dotfiles
+
 ./setup.sh
+
+if [[ $HOME == *dossantos* ]]; then
+    echo "-> Running from Remote machine..."
+    brew bundle --file=custom/remote/Brewfile
+fi
+
 cd -
 echo "==> Dotfiles updated successfully"

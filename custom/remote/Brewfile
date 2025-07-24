@@ -1,5 +1,7 @@
-# Tiger Dependency
+tap "fforster/gitlab-mcp", "https://gitlab.com/fforster/homebrew-gitlab-mcp.git"
+
 brew "libpq"
+brew "gitlab-mcp"
 
 cask "notion"
 cask "loom"
