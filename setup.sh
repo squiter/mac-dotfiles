@@ -78,7 +78,7 @@ else
 fi
 
 cd $code_dir/emacs-dotfiles
-stow --verbose --target=$HOME dotfiles
+stow --adopt --verbose --target=$HOME dotfiles
 cd -
 
 echo "Synchronizing Bitwarden Vault"
