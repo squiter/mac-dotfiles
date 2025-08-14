@@ -41,6 +41,17 @@ if status is-interactive
         string join '' -- $stat ' ' (set_color green) '[📁 ' (prompt_pwd)']' (set_color normal) (fish_git_prompt) '> '
     end
 
+    function fzf_history
+        set -l entries (history --show-time='%F %T │ ' | awk '!seen[$0]++' | fzf --reverse --tiebreak=index --height=40% --ansi)
+
+        if test -n "$entries"
+            set -l cmd (string split '│' -- $entries | string trim | tail -n +2)
+            commandline --replace "$cmd"
+        end
+    end
+
+    bind \cr fzf_history
+
     # Homebrew
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
