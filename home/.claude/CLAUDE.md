@@ -1,0 +1,1 @@
+- every time you need to create a file that wont be commited to our repository you should add it to the /bls/ directory in the root of the project since this directory was ignored by my global git ignore.
