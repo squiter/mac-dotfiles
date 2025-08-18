@@ -78,7 +78,7 @@ else
 fi
 
 cd $code_dir/emacs-dotfiles
-stow --adopt --verbose --target=$HOME dotfiles
+stow --verbose --target=$HOME dotfiles
 cd -
 
 echo "Synchronizing Bitwarden Vault"
@@ -134,7 +134,7 @@ fi
 
 ## Create the symlinks of my dotfiles (without linking directories)
 cd $code_dir/mac-dotfiles
-stow --verbose --no-folding --target=$HOME home
+stow --adopt --verbose --no-folding --target=$HOME home
 
 authinfo_file="${HOME}/.authinfo"
 if [ ! -f "${authinfo_file}" ]; then
