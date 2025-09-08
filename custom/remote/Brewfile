@@ -1,5 +1,6 @@
 tap "fforster/gitlab-mcp", "https://gitlab.com/fforster/homebrew-gitlab-mcp.git"
 
+brew "icu4c"
 brew "libpq"
 brew "gitlab-mcp"
 

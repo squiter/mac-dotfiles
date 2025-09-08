@@ -19,6 +19,11 @@ if status is-interactive
     # PSQL load path
     fish_add_path -aP $HOMEBREW_PREFIX/opt/libpq/bin
 
+    if not string match -q "*homebrew*" (command -v icu-config)
+        # Lib icu4c for postgrew 17
+        brew link icu4c --force
+    end
+
     # Loading the launchctl from binaries installed by Mise
     if not launchctl list | grep dev.remote.postgres &>/dev/null
         launchctl load ~/Library/LaunchAgents/dev.remote.postgres.mise.plist
