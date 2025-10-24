@@ -121,4 +121,10 @@ if status is-interactive
     function fish_user_key_bindings
         bind \cxo 'cd $(all_projects | fzf); commandline -f repaint'
     end
+
+    # Make a directory and Move to it
+    function mkcd
+        mkdir -p $argv[1]
+        cd $argv[1]
+    end
 end
