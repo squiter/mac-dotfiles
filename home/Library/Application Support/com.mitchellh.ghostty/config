@@ -2,7 +2,7 @@ window-padding-x = 15
 window-padding-y = 15
 background-opacity = 0.8
 background-blur-radius = 50
-theme = shades-of-purple
+theme = Shades Of Purple
 
 font-family="IosevkaTerm Nerd Font Mono"
 font-style=ExtraLight
