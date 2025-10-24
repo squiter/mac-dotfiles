@@ -1,2 +1,3 @@
 - every time you need to create a file that wont be commited to our repository you should add it to the /bls/ directory in the root of the project since this directory was ignored by my global git ignore.
 - Always use git add with only the files you changed, never all the workspace
+- to ensure the implementation is correct run mix format and credo on all changed files
