@@ -18,5 +18,10 @@
     "terminal.integrated.allowChords": false, // To allow ⌃C ⌃C to quit iex
     "workbench.colorTheme": "Noctis Uva",
     "window.zoomLevel": 0.6,
-    "magit.git-path": "/opt/homebrew/bin/git"
+    "magit.git-path": "/opt/homebrew/bin/git",
+    "cursor.cpp.disabledLanguages": [
+        "markdown",
+        "plaintext",
+        "magit"
+    ]
 }
