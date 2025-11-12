@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+#
+# rmt-event-diff — Compare previous vs current JSON timesheet objects
+#
+# Usage:
+#   ./rmt-event-diff <file.json>
+#   ./rmt-event-diff -h | --help
+#
+# Description:
+#   This script compares the "previous" and "current" sections of a JSON file,
+#   showing what changed at the root (timesheet) level and inside each
+#   time_tracking, including nested "time_classifications" arrays.
+#
+# Tips:
+#   - To hide the 'time_trackings' section from the diff:
+#       ./rmt-event-diff data.json | jq 'del(.time_trackings)'
+#   - To show only the time_trackings:
+#       ./rmt-event-diff data.json | jq '.time_trackings'
+#
+# Requirements:
+#   - jq (version 1.6 or newer)
+#
+
+# --- Show help and exit ---
+if [[ "$1" == "-h" || "$1" == "--help" || -z "$1" ]]; then
+  cat <<'USAGE'
+Usage: ./rmt-event-diff <file.json>
+
+Compare the "previous" and "current" objects in a JSON file
+and print a structured diff showing what changed.
+
+Example:
+  ./rmt-event-diff data.json
+  ./rmt-event-diff data.json | jq 'del(.time_trackings)'
+
+Options:
+  -h, --help    Show this help message
+
+Requires jq 1.6+
+USAGE
+  exit 0
+fi
+
+# --- Actual jq logic ---
+jq '
+  # deep diff with special handling for time_classifications arrays
+  def deep_diff($a; $b):
+    if ($a // null) == ($b // null) then empty
+    elif (($a // null) | type) != (($b // null) | type) then {"from": $a, "to": $b}
+    elif (($a // null) | type) == "object" then
+      (($a // {}) + ($b // {}) | keys_unsorted) as $keys
+      | reduce $keys[] as $k ({}; . +
+          (if ($a[$k] // null) == ($b[$k] // null) then {}
+           elif $k == "time_classifications" then
+             { ($k): (
+                 (($a[$k] // []) | map({((.id|tostring)): .}) | add // {}) as $old |
+                 (($b[$k] // []) | map({((.id|tostring)): .}) | add // {}) as $new |
+                 ($old + $new | keys_unsorted) as $ids |
+                 reduce $ids[] as $id ({}; . +
+                   (if ($old[$id] // null) == ($new[$id] // null) then {}
+                    elif ($old[$id] // null) == null then { ($id): {"added": $new[$id]} }
+                    elif ($new[$id] // null) == null then { ($id): {"removed": $old[$id]} }
+                    else { ($id): deep_diff($old[$id]; $new[$id]) }
+                    end)
+                 )
+               )
+             }
+           else { ($k): deep_diff($a[$k]; $b[$k]) }
+           end)
+        )
+    elif (($a // null) | type) == "array" then
+      if ($a|length) == ($b|length) and ($a - $b|length) == 0 then empty
+      else {"from": $a, "to": $b}
+      end
+    else {"from": $a, "to": $b}
+    end;
+
+  def to_map($arr):
+    ($arr // [])
+    | map(select(has("id")) | {((.id|tostring)): .})
+    | add // {};
+
+  (
+    .previous as $prev |
+    .current as $curr |
+    deep_diff($prev; $curr)
+  )
+' "$1"
