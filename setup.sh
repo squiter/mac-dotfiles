@@ -63,13 +63,14 @@ if [[ "$(command -v elixir)" != *"mise"* ]]; then
 fi
 
 ## Emacs Congig
-ln -fs /opt/homebrew/opt/emacs-plus@30/Emacs.app /Applications
+emacs_version="emacs-plus@30"
+ln -fs /opt/homebrew/opt/$emacs_version/Emacs.app /Applications
 
 if [[ -e /Applications/Emacs.app ]]; then
     echo "Emacs.app already at /Applications"
 else
-    ln -fs /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications
-fi
+    ln -fs /opt/homebrew/opt/$emacs_version/Emacs.app /Applications
+i
 
 if [ ! -d "${code_dir}/emacs-dotfiles" ]; then
     git clone git@github.com:squiter/emacs-dotfiles.git $code_dir/emacs-dotfiles
