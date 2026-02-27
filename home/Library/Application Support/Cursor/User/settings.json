@@ -11,7 +11,7 @@
     "editor.formatOnSave": true,
     "terminal.integrated.scrollback": 100000,
     "extensions.ignoreRecommendations": true,
-    "lexical.server.releasePathOverride": "/Users/brunno.dossantosleite/dev/code/lexical/_build/dev/package/lexical",
+    "lexical.server.releasePathOverride": "/Users/brunno.dossantosleite/home/bin",
     "git.openRepositoryInParentFolders": "always",
     "terminal.external.osxExec": "Ghostty.app",
     "terminal.integrated.macOptionIsMeta": true,
@@ -23,5 +23,10 @@
         "markdown",
         "plaintext",
         "magit"
-    ]
+    ],
+    "files.associations": {
+        "*.livemd": "markdown"
+    },
+    "cursor.worktreeMaxCount": 0,
+    "expert.notifyOnServerAutoUpdate": false
 }

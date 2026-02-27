@@ -2,3 +2,5 @@
 /.envrc
 /bls/
 /CLAUDE.local.md
+.DS_Store
+.claude/settings.local.json

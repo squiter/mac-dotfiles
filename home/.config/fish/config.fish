@@ -89,6 +89,9 @@ if status is-interactive
     # Used for ElixirLS
     fish_add_path -aP $HOME/.local/bin
 
+    # Obsidian CLI
+    fish_add_path -aP /Applications/Obsidian.app/Contents/MacOS
+
     # FZF Configs
     set -x FZF_DEFAULT_OPTS '--height 40% --layout=reverse --border'
     set -x FZF_DEFAULT_OPTS "$FZF_DEFAULT_OPTS --bind ctrl-k:kill-line,ctrl-g:abort"
