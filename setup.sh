@@ -70,7 +70,7 @@ if [[ -e /Applications/Emacs.app ]]; then
     echo "Emacs.app already at /Applications"
 else
     ln -fs /opt/homebrew/opt/$emacs_version/Emacs.app /Applications
-i
+fi
 
 if [ ! -d "${code_dir}/emacs-dotfiles" ]; then
     git clone git@github.com:squiter/emacs-dotfiles.git $code_dir/emacs-dotfiles
