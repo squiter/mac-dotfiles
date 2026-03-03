@@ -64,6 +64,9 @@ if status is-interactive
         set -p fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
     end
 
+    # Completion for jj
+    eval "$(jj util completion fish | source)"
+
     # Ensure gpg-agent was running
     eval "$(gpg-agent --daemon &>/dev/null)"
 

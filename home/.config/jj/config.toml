@@ -1,0 +1,20 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[user]
+name = "Brunno dos Santos"
+email = "brunno.dossantosleite@remote.com"
+
+[signing]
+behavior = "own"
+backend = "gpg"
+key = "27690432B1B2AD1C"
+
+[ui]
+default-command = "log"
+
+[[--scope]]
+--when.repositories = ["~/dev/code"]
+[--scope.user]
+email = "brunno@brunno.me"
+[--scope.signing]
+key = "FE6A1FA1A86BDBC5"
