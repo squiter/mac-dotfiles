@@ -65,6 +65,8 @@ if status is-interactive
 
     bind \cr fzf_history
 
+    set -gx EDITOR nvim
+
     # Homebrew
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
