@@ -12,6 +12,10 @@ key = "27690432B1B2AD1C"
 [ui]
 default-command = "log"
 
+[aliases]
+tug- = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@"]
+
 [[--scope]]
 --when.repositories = ["~/dev/code"]
 [--scope.user]
