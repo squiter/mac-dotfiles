@@ -33,6 +33,12 @@ if status is-interactive
         launchctl load ~/Library/LaunchAgents/dev.remote.redis.mise.plist
         echo "-> dev.remote.redis.mise.plist loaded and will start automaticall!"
     end
+
+    function fix-staging --description "Remove employ.niceremote.com hosts override and flush DNS (macOS)"
+        sudo sed -i '' '/employ.niceremote.com/d' /etc/hosts
+        sudo dscacheutil -flushcache
+        sudo killall -HUP mDNSResponder
+    end
     
     # Aliases
     abbr -a neo-nld-tests "MIX_ENV=test mix do --app netherlands test"
