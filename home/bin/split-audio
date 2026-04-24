@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# split-audio.sh
+# Splits a long .m4a (or similar audio file) into 20-minute chunks
+#
+# Usage:
+#   ./split-audio.sh input.m4a
+#
+# Requirements:
+#   ffmpeg installed
+#
+# Install on macOS:
+#   brew install ffmpeg
+
+set -euo pipefail
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <input-audio-file>"
+  exit 1
+fi
+
+INPUT_FILE="$1"
+
+if [ ! -f "$INPUT_FILE" ]; then
+  echo "File not found: $INPUT_FILE"
+  exit 1
+fi
+
+FILENAME=$(basename -- "$INPUT_FILE")
+EXTENSION="${FILENAME##*.}"
+BASENAME="${FILENAME%.*}"
+
+OUTPUT_DIR="${BASENAME}_chunks"
+
+mkdir -p "$OUTPUT_DIR"
+
+echo "Splitting '$INPUT_FILE' into 20-minute parts..."
+
+ffmpeg -i "$INPUT_FILE" \
+  -f segment \
+  -segment_time 1200 \
+  -c copy \
+  "$OUTPUT_DIR/${BASENAME}_part_%03d.${EXTENSION}"
+
+echo "Done!"
+echo "Files saved in: $OUTPUT_DIR"
