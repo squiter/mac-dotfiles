@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+# csv_to_elixir_list.sh — turn one CSV column into an Elixir list of strings.
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: csv_to_elixir_list.sh [options] <file.csv>
+
+Options:
+  -c, --column N   1-based column index (default: 1)
+  --keep-header    Treat line 1 as data (default: skip line 1 as header)
+  -h, --help       Show this help
+
+Use - for stdin: csv_to_elixir_list.sh - < file.csv
+
+Note: comma-split only; best for single-column UUID exports.
+EOF
+}
+
+COLUMN=1
+SKIP_HEADER=1
+FILE=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -c|--column)
+      COLUMN="${2:?}"
+      shift 2
+      ;;
+    --keep-header)
+      SKIP_HEADER=0
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    -*)
+      echo "Unknown option: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+    *)
+      FILE="$1"
+      shift
+      ;;
+  esac
+done
+
+if [[ -z "$FILE" ]]; then
+  usage >&2
+  exit 1
+fi
+
+if [[ "$FILE" != "-" ]]; then
+  if [[ "$FILE" == \~/* || "$FILE" == \~ ]]; then
+    FILE="$HOME${FILE#\~}"
+  fi
+  if [[ ! -f "$FILE" ]]; then
+    echo "Not a file: $FILE" >&2
+    exit 1
+  fi
+fi
+
+awk -v col="$COLUMN" -v skip_header="$SKIP_HEADER" '
+function elixir_escape(s,   out, i, c) {
+  out = ""
+  for (i = 1; i <= length(s); i++) {
+    c = substr(s, i, 1)
+    if (c == "\\")      { out = out "\\\\" }
+    else if (c == "\"") { out = out "\\\"" }
+    else                { out = out c }
+  }
+  return out
+}
+
+BEGIN {
+  print "["
+  sep = ""
+}
+
+{
+  gsub(/\r/, "", $0)
+  if (NR == 1 && skip_header) next
+
+  val = $col
+  sub(/^[ \t]+/, "", val)
+  sub(/[ \t]+$/, "", val)
+  if (match(val, /^".*"$/)) {
+    val = substr(val, 2, length(val) - 2)
+    gsub(/""/, "\"", val)
+  }
+  if (val == "") next
+
+  printf "%s  \"%s\"", sep, elixir_escape(val)
+  sep = ",\n"
+}
+
+END {
+  print ""
+  print "]"
+}
+' "$FILE"

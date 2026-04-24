@@ -4,3 +4,7 @@
 /CLAUDE.local.md
 .DS_Store
 .claude/settings.local.json
+.dexter.d*
+.dexter.db-wal
+.projectile
+.dir-locals.el
