@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -eou pipefail
+
+code_dir="${HOME}/dev/code"
+original_dir="${PWD}"
+
+cd "${code_dir}/emacs-dotfiles"
+stow --verbose --target="${HOME}" dotfiles
+
+cd "${code_dir}/mac-dotfiles"
+stow --adopt --verbose --no-folding --target="${HOME}" home
+
+cd "${original_dir}"
