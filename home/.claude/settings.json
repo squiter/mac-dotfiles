@@ -64,6 +64,17 @@
   },
   "enabledPlugins": {
     "claude-code-wakatime@wakatime": true,
-    "gitlab@claude-plugins-official": true
-  }
+    "gitlab@claude-plugins-official": true,
+    "brag-document@remote-claude-plugins": true,
+    "slack@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "remote-claude-plugins": {
+      "source": {
+        "source": "git",
+        "url": "git@gitlab.com:remote-com/claude-code-plugin-marketplace.git"
+      }
+    }
+  },
+  "tui": "fullscreen"
 }

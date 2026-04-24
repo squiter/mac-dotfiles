@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>dev.brunno.brag.synthesize</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/brunno.dossantosleite/dev/code/mac-dotfiles/home/bin/brag</string>
+    <string>synthesize</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key><integer>5</integer>
+    <key>Hour</key><integer>19</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/Users/brunno.dossantosleite/.local/bin:/Users/brunno.dossantosleite/.local/share/mise/shims:/usr/local/bin:/usr/bin:/bin</string>
+    <key>MISE_DATA_DIR</key>
+    <string>/Users/brunno.dossantosleite/.local/share/mise</string>
+    <key>HOME</key>
+    <string>/Users/brunno.dossantosleite</string>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/tmp/brag-synthesize.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/brag-synthesize.err</string>
+</dict>
+</plist>

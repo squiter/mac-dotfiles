@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Usage: brag [synthesize|YYYY-MM-DD|team ...]
+CLAUDE=/Users/brunno.dossantosleite/.local/bin/claude
+cd /Users/brunno.dossantosleite/dev/remote/tiger/apps/tiger
+if [ $# -eq 0 ]; then
+  exec "$CLAUDE" "/brag-document:brag"
+else
+  exec "$CLAUDE" "/brag-document:brag $*"
+fi

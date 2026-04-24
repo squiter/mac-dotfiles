@@ -114,7 +114,7 @@ else
     if ! cat /etc/shells | grep -q "homebrew"; then
         echo "/usr/homebrew/bin/fish" | sudo tee -a /etc/shells
     fi
-    sudo chsh -s /opt/homebrew/bin/fish "$USER"
+    sudo chsh -s /opt/homebrew/bin/fish "$USER" || true
     echo "Shell setted to (homebrew) fish successefully!"
 fi
 
@@ -136,6 +136,12 @@ fi
 ## Create the symlinks of my dotfiles (without linking directories)
 cd $code_dir/mac-dotfiles
 stow --adopt --verbose --no-folding --target=$HOME home
+
+## Load LaunchAgents (Remote machine only)
+if [[ $HOME == *dossantos* ]]; then
+    launchctl load -w $HOME/Library/LaunchAgents/dev.brunno.brag.collect.plist 2>/dev/null || true
+    launchctl load -w $HOME/Library/LaunchAgents/dev.brunno.brag.synthesize.plist 2>/dev/null || true
+fi
 
 authinfo_file="${HOME}/.authinfo"
 if [ ! -f "${authinfo_file}" ]; then

@@ -1,0 +1,83 @@
+#!/usr/bin/env python3
+
+import json
+import sys
+import subprocess
+import glob
+import os
+from collections import defaultdict
+
+WEEKDAYS = {0: "Sun", 1: "Mon", 2: "Tue", 3: "Wed", 4: "Thu", 5: "Fri", 6: "Sat"}
+
+CYAN = "\033[36m"
+RESET = "\033[0m"
+
+
+def format_interval(seconds):
+    h = seconds // 3600
+    m = (seconds % 3600) // 60
+    parts = []
+    if h:
+        parts.append(f"{h}h")
+    if m:
+        parts.append(f"{m}m")
+    return "Every " + " ".join(parts)
+
+
+def format_calendar(calendar):
+    entries = [calendar] if isinstance(calendar, dict) else list(calendar)
+    tmap = defaultdict(list)
+    for e in entries:
+        h = e.get("Hour", 0)
+        m = e.get("Minute", 0)
+        t = f"{h:02d}:{m:02d}"
+        wd = e.get("Weekday")
+        d = e.get("Day")
+        if wd is not None:
+            tmap[t].append((wd, WEEKDAYS.get(wd, f"Day{wd}")))
+        elif d is not None:
+            tmap[t].append((d, f"Day {d}"))
+        else:
+            tmap[t].append((-1, "Daily"))
+
+    lines = []
+    for t, days in sorted(tmap.items()):
+        days_str = ", ".join(x[1] for x in sorted(days))
+        lines.append(f"{days_str} at {t}")
+    return lines
+
+
+def process_plist(path):
+    result = subprocess.run(
+        ["plutil", "-convert", "json", "-o", "-", path],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return
+
+    data = json.loads(result.stdout)
+    label = data.get("Label", os.path.basename(path))
+    interval = data.get("StartInterval")
+    calendar = data.get("StartCalendarInterval")
+
+    if not interval and not calendar:
+        return
+
+    print(f"{CYAN}{label}{RESET}")
+    if interval:
+        print(f"  {format_interval(interval)}")
+    else:
+        for line in format_calendar(calendar):
+            print(f"  {line}")
+    print()
+
+
+def main():
+    pattern = os.path.expanduser("~/Library/LaunchAgents/*.plist")
+    for path in sorted(glob.glob(pattern)):
+        process_plist(path)
+
+
+if __name__ == "__main__":
+    main()

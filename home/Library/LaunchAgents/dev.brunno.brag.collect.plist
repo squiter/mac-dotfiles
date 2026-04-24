@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>dev.brunno.brag.collect</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/brunno.dossantosleite/dev/code/mac-dotfiles/home/bin/brag</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict>
+      <key>Weekday</key><integer>1</integer>
+      <key>Hour</key><integer>18</integer>
+      <key>Minute</key><integer>30</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key><integer>2</integer>
+      <key>Hour</key><integer>18</integer>
+      <key>Minute</key><integer>30</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key><integer>3</integer>
+      <key>Hour</key><integer>18</integer>
+      <key>Minute</key><integer>30</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key><integer>4</integer>
+      <key>Hour</key><integer>18</integer>
+      <key>Minute</key><integer>30</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key><integer>5</integer>
+      <key>Hour</key><integer>18</integer>
+      <key>Minute</key><integer>30</integer>
+    </dict>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/Users/brunno.dossantosleite/.local/bin:/Users/brunno.dossantosleite/.local/share/mise/shims:/usr/local/bin:/usr/bin:/bin</string>
+    <key>MISE_DATA_DIR</key>
+    <string>/Users/brunno.dossantosleite/.local/share/mise</string>
+    <key>MISE_CONFIG_DIR</key>
+    <string>/Users/brunno.dossantosleite/.config/mise</string>
+    <key>HOME</key>
+    <string>/Users/brunno.dossantosleite</string>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/tmp/brag-collect.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/brag-collect.err</string>
+</dict>
+</plist>
