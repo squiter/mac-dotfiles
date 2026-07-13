@@ -67,9 +67,6 @@ if status is-interactive
 
     set -gx EDITOR nvim
 
-    # Homebrew
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-
     # https://docs.brew.sh/Shell-Completion
     if test -d (brew --prefix)"/share/fish/completions"
         set -p fish_complete_path (brew --prefix)/share/fish/completions
@@ -80,13 +77,12 @@ if status is-interactive
     end
 
     # Completion for jj
-    eval "$(jj util completion fish | source)"
-
-    # Ensure gpg-agent was running
-    eval "$(gpg-agent --daemon &>/dev/null)"
+    if command -q jj
+        jj util completion fish | source
+    end
 
     # Set my key as default
-    set -x GPGKEY A86BDBC5
+    set -gx GPGKEY A86BDBC5
 
     # Mise
     eval "$(/opt/homebrew/bin/mise activate fish)"
